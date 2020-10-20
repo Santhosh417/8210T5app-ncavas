@@ -7,7 +7,7 @@ from .models import Volunteer, User
 class VolunteerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = User
-        fields = ('first_name', 'last_name', 'email', 'phone', 'username', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'mobile_num', 'username', 'password1', 'password2')
 
     def save(self):
         user = super().save(commit=False)
@@ -20,6 +20,6 @@ class VolunteerSignUpForm(UserCreationForm):
 class VolunteerForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'phone')
+        fields = ('first_name', 'last_name', 'email', 'mobile_num')
 
 
