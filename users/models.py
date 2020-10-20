@@ -3,33 +3,36 @@ from django.db import models
 
 
 class User(AbstractUser):
-    is_customer = models.BooleanField(default=False)
-    phone = models.CharField(max_length=20, null=False)
+    street_address = models.CharField(max_length=100, null=False, default= '')
+    city = models.CharField(max_length=30, null=False, default= '')
+    state = models.CharField(max_length=30, null=False, default= '')
+    zip = models.CharField(max_length=5, null=False, default= '')
+    mobile_num = models.CharField (max_length=15, null=True)
 
-
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name="customer")
-    UNMARRIED = 'UM'
-    MARRIED = 'MA'
-    BLANK = ''
-    marital_status_choices = (
-        (BLANK,''),
-        (UNMARRIED, 'Unmarried'),
-        (MARRIED, 'Married'),
-    )
-    marital_status = models.CharField(max_length=2,
-                                      choices=marital_status_choices,
-                                      default=BLANK)
-    vacation_preference_choices = (
-        ('Beach','Beach'),
-        ('Nature', 'Nature'),
-        ('Adventure', 'Adventure'),
-        ('Inspiring', 'Inspiring'),
-    )
-    preferred_type_of_vacations = models.CharField(max_length=1, choices=vacation_preference_choices)
+class Volunteer(User):
+    work_phone = models.CharField (max_length=15, null=True)
+    hours = models.CharField(max_length=2, null=True)
+    specialization = models.CharField (max_length=30, null=True)
+    notes = models.CharField (max_length=300, null=True)
+    class Meta:
+         verbose_name = "Volunteer"
 
     def __str__(self):
-        return self.user.username
+        return self.username
 
+class Staff(User):
+    work_phone = models.CharField (max_length=15, null=True)
+    class Meta:
+         verbose_name = "Staff"
 
+    def __str__(self):
+        return self.username
 
+class Victim(User):
+    disease_type = models.CharField (max_length=50, null=True)
+    notes = models.CharField (max_length=300, null=True)
+    class Meta:
+         verbose_name = "Victim"
+
+    def __str__(self):
+        return self.username
