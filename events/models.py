@@ -15,9 +15,15 @@ class Location(models.Model):
 class Event(models.Model):
     event_id = models.AutoField(primary_key=True)
     event_name = models.CharField(max_length=50, null=True)
+    event_choices = (
+        ('Public','Public'),
+        ('OneToOne', 'One To One'),
+        ('Group', 'Group')
+    )
+    event_type = models.CharField(max_length=10, choices=event_choices)
     start_date_time = models.DateTimeField()
     end_date_time = models.DateTimeField()
-    description = models.CharField(max_length=300, null=True)
+    description = models.CharField(max_length=300, null=True, blank=True)
     is_important = models.BooleanField(default=False)
     staff = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, related_name='event_staff')
     volunteer = models.ForeignKey(Volunteer, on_delete=models.DO_NOTHING, related_name='event_volunteer')

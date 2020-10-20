@@ -12,3 +12,4 @@ class ActivityAdmin(admin.ModelAdmin):
 
 admin.site.register(Location)
 admin.site.register(Event, ActivityAdmin)
+admin.site.register(Enrollment)
