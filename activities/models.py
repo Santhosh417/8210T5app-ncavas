@@ -33,12 +33,12 @@ class Activity(models.Model):
 
 class Enrollment(models.Model):
     enrollment_id = models.AutoField(primary_key=True)
-    notes = models.CharField(max_length=300, null=True, blank=True)
-    is_important = models.BooleanField(default=False)
     activity = models.ForeignKey(Activity, on_delete=models.DO_NOTHING,
                               related_name='enrollment_activity')
     victim = models.ForeignKey(Victim, on_delete=models.DO_NOTHING,
                                   related_name='enrollment_victim')
+    notes = models.CharField(max_length=300, null=True, blank=True)
+    is_important = models.BooleanField(default=False)
 
     def __str__(self):
         return self.victim.first_name
