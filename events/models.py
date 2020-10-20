@@ -12,29 +12,25 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
-class Activity(models.Model):
-    activity_id = models.AutoField(primary_key=True)
-    activity_name = models.CharField(max_length=50, null=True)
+class Event(models.Model):
+    event_id = models.AutoField(primary_key=True)
+    event_name = models.CharField(max_length=50, null=True)
     start_date_time = models.DateTimeField()
     end_date_time = models.DateTimeField()
     description = models.CharField(max_length=300, null=True)
     is_important = models.BooleanField(default=False)
-    staff = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, related_name='activity_staff')
-    volunteer = models.ForeignKey(Volunteer, on_delete=models.DO_NOTHING, related_name='activity_volunteer')
-    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='activity_location')
-
-    class Meta:
-        verbose_name = 'Activity'
-        verbose_name_plural = 'Activities'
+    staff = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, related_name='event_staff')
+    volunteer = models.ForeignKey(Volunteer, on_delete=models.DO_NOTHING, related_name='event_volunteer')
+    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='event_location')
 
     def __str__(self):
-        return self.activity_name
+        return self.event_name
 
 
 class Enrollment(models.Model):
     enrollment_id = models.AutoField(primary_key=True)
-    activity = models.ForeignKey(Activity, on_delete=models.DO_NOTHING,
-                              related_name='enrollment_activity')
+    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING,
+                              related_name='enrollment_event')
     victim = models.ForeignKey(Victim, on_delete=models.DO_NOTHING,
                                   related_name='enrollment_victim')
     notes = models.CharField(max_length=300, null=True, blank=True)

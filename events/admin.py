@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Location, Activity, Enrollment
+from .models import Location, Event, Enrollment
 
 
 class EnrollmentInline(admin.TabularInline):
@@ -11,4 +11,4 @@ class ActivityAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Location)
-admin.site.register(Activity, ActivityAdmin)
+admin.site.register(Event, ActivityAdmin)

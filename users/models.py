@@ -13,7 +13,7 @@ class Volunteer(User):
     work_phone = models.CharField (max_length=15, null=True)
     hours = models.CharField(max_length=2, null=True)
     specialization = models.CharField (max_length=30, null=True)
-    notes = models.CharField (max_length=300, null=True)
+    notes = models.CharField (max_length=300, null=True, blank=True)
     class Meta:
          verbose_name = "Volunteer"
 
@@ -30,7 +30,7 @@ class Staff(User):
 
 class Victim(User):
     disease_type = models.CharField (max_length=50, null=True)
-    notes = models.CharField (max_length=300, null=True)
+    notes = models.CharField (max_length=300, null=True, blank=True)
     class Meta:
          verbose_name = "Victim"
 
