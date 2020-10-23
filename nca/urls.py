@@ -3,6 +3,9 @@ from django.urls import path
 from django.conf import settings
 from nca import views
 
+
+app_name = 'nca'
 urlpatterns = [
-    path('', views.home, name="home")
+    path('', views.home, name="home"),
+    path('workinprogress/', views.workinprogress, name="workinprogress"),
 ]

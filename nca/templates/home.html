@@ -5,6 +5,26 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+        {% if events.count <= 0 %}
+            <h4>Hello {{ user.username }}, you have no upcoming meetings.</h4>
+        {% else %}
+          <h5>Hello {{ user.username }}, you have the following upcoming meetings:</h5>
+          <table class="table table-borderless">
+            <tbody>
+            {% for event in events %}
+              <tr>
+                <td><i class="far fa-calendar-alt fa-2x"></i></td>
+                  <td><h7><b>{{ event.event_name }}</b> - {% if event.event_type == "OneToOne" %}One to one {% elif event.event_type == "Group" %}Group {% endif %}meeting with {% for victim in event.victims %}{{ victim.first_name }} {{ victim.last_name }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %} at {{ event.location }}. Timings : from {{ event.start_date_time }} to {{ event.end_date_time }}</h7></td>
+                <td>{% if event.event_type != "Public" %}<a href="{% url 'nca:workinprogress'%}" class="btn btn-outline-dark">Take notes</a>{% endif %}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+    {% endif %}
 <div class="mb-5">
   <div id="myCarousel" class="carousel slide w-75 h-50 ml-auto mr-auto" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -45,14 +65,14 @@
 </div>
 </div>
 <div class="w-75 ml-auto mr-auto myBorder">
-    <div class="text-center">See what's happening</div>
+    <h3 class="text-center">Read more about us</h3>
 </div>
 <div class="mt-5 mb-5 volunteer-story-container">
   <div class="ml-5 volunteer-story-title-container pl-2 pr-4 pb-3 text-white">
     <h2 class="ml-2 mr-3 pr-3 text-uppercase card-heading">Believe you CAN, and you are halfway THERE</h2>
     <div class="border-dark"></div>
     <p class="mt-5 ml-2 mr-5 pr-5">Volunteers do not necessarily have the time; they just have the heart</p>
-    <div class="ml-2 mr-5 mb-2 text-uppercase volunteer-voice-link-container">Voice of our Our volunteers</div>
+      <div class="ml-2 mr-5 mb-2 text-uppercase volunteer-voice-link-container"><a href="{% url 'nca:workinprogress' %}" class="text-decoration-none">Voice of our Our volunteers</a></div>
   </div>
   <div class="image-container">
     <img class="ml-2 stories-image img-fluid" src={% static "img/volunteer_voice.jpg" %}>
@@ -64,7 +84,7 @@
     <h2 class="ml-2 mr-5 pr-5 text-uppercase card-heading">Finding the Positive in Every Negative</h2>
     <div class="border-dark"></div>
     <p class="mt-5 ml-2 mr-5 pr-5">Being empathetic, courageous, and confident gives Ellena strength. </p>
-    <div class="ml-2 mr-5 mb-5 text-uppercase story-link-container">Read Ellena's story</div>
+      <div class="ml-2 mr-5 mb-5 text-uppercase story-link-container"><a href="{% url 'nca:workinprogress' %}" class="text-decoration-none">Read Ellena's story</a></div>
   </div>
   <div class="image-container">
     <img class="ml-2 stories-image img-fluid" src={% static "img/victim_story.jpg" %}>
