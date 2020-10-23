@@ -27,8 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
 INSTALLED_APPS = [
+    'nca.apps.NcaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'events.apps.EventsConfig',
-    'nca.apps.NcaConfig',
     'crispy_forms'
 ]
+# Application definition
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'ncavas.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,8 +121,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.User'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'nca/static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'nca/static')
 
 # Email settings for MyPersonalSpace 4900 on feb 28 2020
 EMAIL_HOST = 'smtp.gmail.com'
