@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load static %}
+{% autoescape off %}
+    <html>
+    {% block content %}
+
+        <body>
+        <div style="font-family:'Helvetica';font-size:medium ">
+        {% blocktrans %}
+            <img style="width: 150px; height:150px ; display: block;margin-left: auto;margin-right: auto" src="cid:myimage" alt="NCA logo" />
+            <p style="font-family:'Comic Sans MS','Droid Sans Mono'; color: #003366; font-size:large;">Welcome to NCA. You're receiving this email because you registered in our
+                {{ nca_site_name }}.
+            </p>
+            <p style="font-size: medium">Next Step: <b>Create a Password</b>
+               <br>  Login with the below username and password to set your own password.
+        {% endblocktrans %}
+            <br>
+            <br>
+            <b>{% trans "Your username:" %} </b>{{ uname }}<br>
+            <b>{% trans "Your one time password:" %} </b>{{ pwd }} </p>
+
+            <h5>{% trans "Thanks for registering our site!" %}</h5>
+
+            <b>{% blocktrans %}The {{ nca_site_name }} team {% endblocktrans %}</b>
+        </div>
+
+        </body>
+    {% endblock content %}
+    </html>
+{% endautoescape %}
+

@@ -28,7 +28,7 @@
         </ul>
     </div>
     <div class="col-sm-2">
-         <ul class="nav navbar-nav navbar-right float-right">
+         <ul class="navbar-nav mr-auto text-white w-100">
                 {% if staff.is_authenticated %}
                     <li class="dropdown">
 
@@ -46,7 +46,8 @@
                         </ul>
                     </li>
                 {% else %}
-                    <li><a class="text-white" href="{% url 'login' %}">Login</a></li>
+                    <li><a class="text-white" href="{% url 'users:login' %}">Login</a></li>
+                    <li><a class="text-white" href="{% url 'users:signup' %}">SignUp</a></li>
                 {% endif %}
             </ul>
     </div>

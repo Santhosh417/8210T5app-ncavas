@@ -2,13 +2,14 @@ from . import views
 from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from .views import signup_volunteer
 
 
 
 app_name = 'users'
 
 urlpatterns = [
-    re_path(r'register_volunteer/', views.register_volunteer, name='register_volunteer'),
+    path('signup/', signup_volunteer, name='signup'),
     path('edit/<int:pk>', views.edit_volunteer, name='edit_volunteer'),
     path('volunteer_list/', views.volunteer_list, name='volunteer_list'),
     path('', views.home, name='home'),

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+<h2>Sign Up</h2>
+    <div class ="card">
+<form method="post" style="align-items: center; align: center">
+  {% csrf_token %}
+    <table>
+  {{ form }}
+        <button class="btn btn-success" type="submit">Sign Up</button>
+      </table>
+</form>
+    </div>
+{% endblock content %}
+</html>
+
+<style>
+    .card {
+    {#display: flex;#}
+        position: relative;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.card form {
+    max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
+}
+</style>
