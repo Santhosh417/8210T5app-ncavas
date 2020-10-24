@@ -136,5 +136,6 @@ EMAIL_HOST_PASSWORD = 'ncamsd@8210!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+LOGOUT_REDIRECT_URL = '/'
 
 django_heroku.settings(locals())
