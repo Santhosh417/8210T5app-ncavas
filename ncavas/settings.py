@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Application definition
 INSTALLED_APPS = [
     'nca.apps.NcaConfig',
     'django.contrib.admin',
@@ -37,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'events.apps.EventsConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'django.contrib.postgres',
 ]
 # Application definition
 
@@ -77,8 +79,11 @@ WSGI_APPLICATION = 'ncavas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ncavas',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'PORT': '5433'
     }
 }
 
@@ -118,13 +123,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.User'
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'nca/static')
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media')
+MEDIA_URL ='/media/'
 
 # Email settings for MyPersonalSpace 4900 on feb 28 2020
 EMAIL_HOST = 'smtp.gmail.com'
@@ -133,3 +136,5 @@ EMAIL_HOST_PASSWORD = 'ncamsd@8210!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+
+django_heroku.settings(locals())
