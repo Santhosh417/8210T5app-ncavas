@@ -64,7 +64,7 @@ def faq(request):
 
 
 
-def login(request):
+def loginView(request):
     user = ''
     error = ''
     if request.method == 'POST':
@@ -76,10 +76,11 @@ def login(request):
                     user = User.objects.filter(username=username).first()
                     user = authenticate(username=username, password=password)
                     if user is not None:
-                        if user.last_login is not None:
+                        # if user.last_login is not None:
+                            login(request, user)
                             return redirect('nca:home')
-                        else:
-                            return render(request,'password_change_form.html',{"username":username})
+                        # else:
+                        #     return render(request,'password_change_form.html',{"username":username})
                     else:
                         error = "please enter your username and password"
                         return render(request, 'registration/login.html', {"username": username, "password": password, "error": error})
