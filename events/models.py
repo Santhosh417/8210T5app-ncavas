@@ -20,7 +20,7 @@ class Event(models.Model):
         ('OneToOne', 'One To One'),
         ('Group', 'Group')
     )
-    event_type = models.CharField(max_length=10, choices=event_choices)
+    event_type = models.CharField(max_length=10, choices=event_choices, default='OneToOne')
     start_date_time = models.DateTimeField()
     end_date_time = models.DateTimeField()
     description = models.CharField(max_length=300, null=True, blank=True)
