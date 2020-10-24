@@ -86,7 +86,7 @@ def signup_volunteer(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 def sendEmail_signup(email, pwd, username):
-    img_data = open(settings.MEDIA_ROOT + "/img/NCA_Logo.png", 'rb').read()
+    img_data = open(settings.STATIC_ROOT + "/img/NCA_Logo.png", 'rb').read()
     html_part = MIMEMultipart(_subtype='related')
     # Now create the MIME container for the image
     img = MIMEImage(img_data, 'jpeg')

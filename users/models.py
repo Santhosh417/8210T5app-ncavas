@@ -2,12 +2,12 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 SPECIALIZED_IN_CHOICE = [
-    (1, 'Leukemia'),
-    (2, 'Lymphama'),
-    (3, 'Melanoma'),
-    (4, 'Sarcoma'),
-    (5, 'Skin Cancer'),
-    (6, 'Others'),
+    ('Leukemia', 'Leukemia'),
+    ('Lymphama', 'Lymphama'),
+    ('Melanoma', 'Melanoma'),
+    ('Sarcoma', 'Sarcoma'),
+    ('Skin Cancer', 'Skin Cancer'),
+    ('Others', 'Others'),
 ]
 
 

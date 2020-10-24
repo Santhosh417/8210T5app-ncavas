@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.context_processors import csrf
@@ -66,4 +68,8 @@ def login(request):
     return render(request, 'registration/login.html',
                   {'login': login})
 
-
+# produces events page
+def events_details(request, **kwargs):
+    public = Event.objects.all().filter(event_type ='Public')
+    now= datetime.datetime.now()
+    return render(request, 'eventsPage.html', {'public_events':public,'now': now})

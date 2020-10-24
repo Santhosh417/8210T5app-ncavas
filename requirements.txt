@@ -1,2 +1,6 @@
 Django~=2.2.4
 django-crispy-forms
+gunicorn
+django-heroku
+psycopg2==2.8.4
+Pillow==8.0.1
