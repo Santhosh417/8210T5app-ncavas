@@ -68,22 +68,15 @@ def login(request):
     user = ''
     error = ''
     if request.method == 'POST':
-        print('post')
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         if username and password:
-                print(username, password)
                 if  User.objects.filter(username=username).exists():
-                    print('user exists')
                     # user exists
                     user = User.objects.filter(username=username).first()
-                    print('shdfvdsj')
-                    print(user.password)
                     user = authenticate(username=username, password=password)
                     if user is not None:
-                        print(user.last_login)
                         if user.last_login is not None:
-                            print('login success')
                             return redirect('nca:home')
                         else:
                             return render(request,'password_change_form.html',{"username":username})
