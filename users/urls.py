@@ -15,7 +15,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     re_path(r'^home/$', views.home, name='home'),
     path('about_page/', views.about, name='about'),
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('accounts/login/', views.login, name='login'),
     path('faq_page/', views.faq, name='faq'),
     #path('', include('django.contrib.auth.urls')),
     path('password_reset_form/',
