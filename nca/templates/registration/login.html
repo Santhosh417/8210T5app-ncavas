@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="headings">Login</h1>
+        <form method="post" >
+        {% csrf_token %}
+            {{ error }}
+        <input type="text" name='username' placeholder="enter username" required/>
+            <input type="text" name='password' placeholder="enter password" required/>
+        <button type="submit">Submit</button>
+      </form>
+{% endblock %}
+
+</html>

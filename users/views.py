@@ -14,6 +14,9 @@ from django.conf import settings
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 #end of email setting_sign up
+from hashlib import sha1
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import PasswordChangeView
 
 
 now = timezone.now()
@@ -60,10 +63,43 @@ def faq(request):
                   {'faq': faq})
 
 
-def login(request):
-    return render(request, 'registration/login.html',
-                  {'login': login})
 
+def login(request):
+    user = ''
+    error = ''
+    if request.method == 'POST':
+        print('post')
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        if username and password:
+                print(username, password)
+                if  User.objects.filter(username=username).exists():
+                    print('user exists')
+                    # user exists
+                    user = User.objects.filter(username=username).first()
+                    print('shdfvdsj')
+                    print(user.password)
+                    user = authenticate(username=username, password=password)
+                    if user is not None:
+                        print(user.last_login)
+                        if user.last_login is not None:
+                            print('login success')
+                            return redirect('nca:home')
+                        else:
+                            return render(request,'password_change_form.html',{"username":username})
+                    else:
+                        error = "please enter your username and password"
+                        return render(request, 'registration/login.html', {"username": username, "password": password, "error": error})
+
+                else:
+                    #show signup form
+                    error = "username not exists please create a new account"
+                    return render(request, 'registration/login.html', {"username": username, "password": password, "error": error})
+        else:
+                error="please enter your username and password"
+                return render(request,'registration/login.html',{"username":username,"password": password,"error":error})
+
+    return render(request,'registration/login.html')
 
 
 def signup_volunteer(request):
