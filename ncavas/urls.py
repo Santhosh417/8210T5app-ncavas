@@ -25,3 +25,7 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('events/',include('events.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = 'NCA Administration' # default: "Django Administration"
+admin.site.index_title = 'NCA Site Administration'        # default: "Site administration"
+admin.site.site_title = 'NCA site admin'                  # default: "Django site admin"

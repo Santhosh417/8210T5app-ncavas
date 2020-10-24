@@ -16,16 +16,16 @@
 
     </div>
     <div class="col-sm-3">
-        <img src={% static "img/NCA_Logo.png" %} alt="logo">
+        <a href="{% url 'nca:home' %}"><img src={% static "img/NCA_Logo.png" %} alt="logo"></a>
     </div>
     <div class="col-sm-2">
 
     </div>
     <div class="col-sm-3 float-right" id="nav_items_container">
         <ul class="navbar-nav mr-auto text-white w-100">
-            <li class="nav-item">Events</li>
-            <li class="nav-item">Stories</li>
-            <li class="nav-item">Contact us</li>
+            <li class="nav-item"><a class="text-white text-decoration-none" href="{% url 'events:events_details' %}">Events</a></li>
+            <li class="nav-item"><a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">Stories</a></li>
+            <li class="nav-item"><a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">Contact us</a></li>
         </ul>
     </div>
     <div class="col-sm-2">
@@ -69,7 +69,7 @@
                Call on <b>402-123-4567</b>
             </div>
             <div class="h6 w-100 p-0">
-                Drop by our office <b>@ My street, My road, My city , My state code, 12345</b>
+                Drop by our office <b>@ 1110 S Pacific road, Dodge street, Omaha, NE, 12345</b>
             </div>
         </div>
     </div>
@@ -79,13 +79,19 @@
         </div>
         <div class="h-75 w-100 p-0 d-flex flex-column">
             <div class="h6 w-100 p-0">
-               FAQ
+                <a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">
+                    FAQ
+                </a>
             </div>
             <div class="h6 w-100 p-0">
-               Our updates
+                <a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">
+                    Our updates
+                </a>
             </div>
             <div class="h6 w-100 p-0">
-                Alumni talk
+                <a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">
+                    Alumni talk
+                </a>
             </div>
         </div>
     </div>
@@ -96,13 +102,19 @@
         <div class="h-75 p-0 d-flex flex-column">
             <div class="mb-3 p-0 d-flex flex-row justify-content-around">
                 <span>
-                    <i class="fab fa-facebook-f fa-2x"></i>
+                    <a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">
+                        <i class="fab fa-facebook-f fa-2x"></i>
+                    </a>
                 </span>
                 <span>
-                    <i class="fab fa-instagram fa-2x"></i>
+                    <a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
                 </span>
                 <span>
-                    <i class="fab fa-twitter fa-2x"></i>
+                    <a class="text-white text-decoration-none" href="{% url 'nca:workinprogress' %}">
+                        <i class="fab fa-twitter fa-2x"></i>
+                    </a>
                 </span>
             </div>
             <div class="h6 p-0">
