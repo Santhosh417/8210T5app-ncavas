@@ -17,7 +17,7 @@ from email.mime.multipart import MIMEMultipart
 from hashlib import sha1
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
-
+from django.contrib.auth.forms import PasswordChangeForm
 
 now = timezone.now()
 def home(request):
@@ -79,7 +79,8 @@ def login(request):
                         if user.last_login is not None:
                             return redirect('nca:home')
                         else:
-                            return render(request,'password_change_form.html',{"username":username})
+                            password_change_form = PasswordChangeForm(user=user)
+                            return render(request,'registration/password_change_form.html',{"username":username,"form":password_change_form})
                     else:
                         error = "please enter your username and password"
                         return render(request, 'registration/login.html', {"username": username, "password": password, "error": error})
