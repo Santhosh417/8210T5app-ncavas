@@ -129,12 +129,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media')
 MEDIA_URL ='/media/'
 
-# Email settings for MyPersonalSpace 4900 on feb 28 2020
+# Email settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ncateam5msd8210@gmail.com'
 EMAIL_HOST_PASSWORD = 'ncamsd@8210!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 
 LOGOUT_REDIRECT_URL = '/'
 django_heroku.settings(locals())
