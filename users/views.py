@@ -1,10 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template.context_processors import csrf
 from django.utils import timezone
-from .models import *
-from django.urls import reverse_lazy
-from django.views import generic
 from .forms import *
 from django.contrib.auth.views import PasswordResetView
 # start for email setting _signup
@@ -13,10 +10,7 @@ from django.core.mail import  EmailMultiAlternatives
 from django.conf import settings
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
-#end of email setting_sign up
-from hashlib import sha1
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth import authenticate, login
 
 
 now = timezone.now()
@@ -77,9 +71,9 @@ def loginView(request):
                     login(request, user)
                     return redirect('nca:home')
                 else:
-                    login(request, user)
-                    error = "Change password"
-                    return render(request, 'registration/login.html', {"username": username, "password": password, "error": error})
+                    user.last_login = timezone.now()
+                    password_change_form = PasswordChangeForm(user=user)
+                    return render(request, 'registration/password_change_form.html', {"username": username, "form": password_change_form})
             else:
                 #show signup form
                 error = "username not exists please create a new account"
