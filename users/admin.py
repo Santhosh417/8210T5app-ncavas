@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Volunteer, Staff, Victim, SpecializedInChoices
+from .models import Volunteer, Staff, Victim
 
 
 class VolunteerAdmin(admin.ModelAdmin):
@@ -108,4 +108,3 @@ class VictimAdmin(admin.ModelAdmin):
 admin.site.register(Volunteer, VolunteerAdmin)
 admin.site.register(Staff, StaffAdmin)
 admin.site.register(Victim, VictimAdmin)
-admin.site.register(SpecializedInChoices)
