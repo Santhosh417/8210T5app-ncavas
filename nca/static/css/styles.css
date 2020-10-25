@@ -214,3 +214,74 @@ footer{
 footer div span h7{
     height : 33.3%;
 }
+
+
+/*--------------CSS for the login-----------------*/
+.form-box{
+    width: 500px;
+    background-color: #fefefe;
+    margin : 12%auto;
+    padding: 50px 0;
+    color: #fff;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 10px;
+    margin-right: 250px;
+    /*margin-top: 50px;*/
+    font-size: large;
+}
+
+h2{
+    text-align: center;
+    /*margin-bottom: 40px;*/
+    margin-bottom: 10px;
+    margin-right: 250px;
+    margin-top: 50px;
+    font-size: 40px;
+
+}
+
+
+.input-box{
+    margin :31px auto;
+    width:80%;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.input-box input{
+    width:90%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+}
+
+.fa{
+    margin-right: 10px;
+}
+
+.eye{
+    position: absolute;
+}
+
+#hide1{
+    display: none;
+}
+
+.login-btn{
+    margin: 40px auto 20px;
+    margin-bottom: 200px;
+    width: 20%;
+    margin-left: 80px;
+/*    display: block;*/
+/*    outline: none;*/
+/*    padding: 80px 0;*/
+/*    border: 1px solid #fff;*/
+    cursor: pointer;
+/*    background: transparent;*/
+/*    color: #fff;*/
+/*    font-size: medium;*/
+}
