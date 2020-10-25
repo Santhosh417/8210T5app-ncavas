@@ -1,16 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+<head>
+    <style>
+        .card form {
+            max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
+            margin: auto;
+        }
+    </style>
+</head>
 
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="headings">Login</h1>
+    <h2>Login</h2>
+    <div class="input-box"></div>
         <form method="post" >
         {% csrf_token %}
             {{ error }}
-        <input type="text" name='username' placeholder="enter username" required/>
-            <input type="text" name='password' placeholder="enter password" required/>
-        <button type="submit">Submit</button>
+        <h1><label for="uname"><b>Username</b></label>
+{#        <i class="fa fa-envelope-o"></i>#}
+        <input type="text" placeholder="Enter Username" name="uname" required></h1>
+
+        <h1><label for="psw"><b>Password</b></label>
+{#        <i class="fa fa-key"></i>#}
+        <input type="password" placeholder="Enter Password" id="myInput" name="psw" required>
+        <span class="eye" onclick="myFunction()">
+            <i id="hide1" class="fa fa-eye"></i>
+            <i id="hide2" class="fa fa-eye-slash"></i>
+        </span>
+        </h1>
+{#        <input type="text" name='username' placeholder="enter username" required/>#}
+{#        <input type="text" name='password' placeholder="enter password" required/>#}
+        <h1><button type="submit" class="login-btn">Submit</button></h1>
       </form>
+
+    <script>
+    function myFunction(){
+        var x= document.getElementById("myInput");
+        var y= document.getElementById("hide1");
+        var z= document.getElementById("hide2");
+
+        if(x.type =='password'){
+            x.type="text";
+            y.style.display="block";
+            z.style.display="none";
+        }
+        else{
+            x.type="password";
+            y.style.display="none";
+            z.style.display="block";
+
+        }
+
+    }
+
+    </script>
 {% endblock %}
 
 </html>
+
+
+---------------Update-------------
+
+
