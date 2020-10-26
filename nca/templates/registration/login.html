@@ -28,7 +28,8 @@
         </h1>
 {#        <input type="text" name='username' placeholder="enter username" required/>#}
 {#        <input type="text" name='password' placeholder="enter password" required/>#}
-        <h1><button type="submit" class="login-btn">Submit</button></h1>
+        <h1><button  class="login-btn"><a  style="color: black" href="{% url 'users:password_reset_form' %}">Forgot Password ?</a></button>
+            <button type="submit" class="login-btn">Submit</button></h1>
       </form>
 
     <script>

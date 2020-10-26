@@ -106,13 +106,13 @@ def signup_volunteer(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 def sendEmail_signup(email, pwd, username):
-    img_data = open(settings.STATIC_ROOT + "/img/NCA_Logo.PNG", 'rb').read()
-    html_part = MIMEMultipart(_subtype='related')
+    # img_data = open(settings.STATIC_ROOT + "/img/NCA_Logo.PNG", 'rb').read()
+    #  html_part = MIMEMultipart(_subtype='related')
     # Now create the MIME container for the image
-    img = MIMEImage(img_data, 'jpeg')
-    img.add_header('Content-Id', '<myimage>')  # angle brackets are important
-    img.add_header("Content-Disposition", "inline", filename="myimage")  # David Hess recommended this edit
-    html_part.attach(img)
+    # img = MIMEImage(img_data, 'jpeg')
+    # img.add_header('Content-Id', '<myimage>')  # angle brackets are important
+    # img.add_header("Content-Disposition", "inline", filename="myimage")  # David Hess recommended this edit
+    # html_part.attach(img)
 
     subject = "Welcome to Nebraska Cancer Association"
     content = {'pwd': pwd, 'uname': username, 'nca_site_name': 'Nebraska Cancer Association'}
@@ -124,7 +124,7 @@ def sendEmail_signup(email, pwd, username):
                                      to=[to_email], )
     html_template = get_template("registration/signup_email_body.html").render(context=content)
     message.attach_alternative(html_template, "text/html")
-    message.attach(html_part)
+    # message.attach(html_part)
     message.send()
 
 class PasswordResetNCAEmailView(PasswordResetView):

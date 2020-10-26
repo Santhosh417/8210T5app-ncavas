@@ -2,7 +2,9 @@ from . import views
 from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from .views import signup_volunteer
+from .views import signup_volunteer, PasswordResetNCAEmailView
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView,\
+    PasswordResetDoneView, PasswordResetConfirmView
 
 
 
@@ -17,24 +19,10 @@ urlpatterns = [
     path('about_page/', views.about, name='about'),
     path('accounts/login/', views.loginView, name='login'),
     path('faq_page/', views.faq, name='faq'),
-    #path('', include('django.contrib.auth.urls')),
-    path('password_reset_form/',
-         auth_views.PasswordResetView.as_view(),
-         name='password_reset_form'),
-    path('password_reset/done/',
-         auth_views.PasswordResetDoneView.as_view(),
-         name='password_reset_done'),
-    path('reset/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(),
-         name='password_reset_confirm'),
-    path('reset/done/',
-         auth_views.PasswordResetCompleteView.as_view(),
-         name='password_reset_complete'),
-    path('users/password_change/',
-         auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form.html'),
-         name='password_change'),
-    path('password_change/done/',
-         auth_views.PasswordChangeDoneView.as_view(),
-         name='password_change_done'),
-
+    path('faq_page/', views.faq, name='faq'),
+    path('password_change/', PasswordChangeView.as_view(template_name='registration/password_change_form.html'), name='password_change'),
+    path('change-password-done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('password-reset-form/', PasswordResetNCAEmailView.as_view(), name='password_reset_form'),
+    path('password-reset-done-form/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password-reset-confirm/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 ]
