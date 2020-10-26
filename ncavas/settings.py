@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'j!l&#exp=69e#5z24!!+&j0qe^s1k8w0sx+ldwu@(4-q^nct-k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,10 +84,6 @@ DATABASES = {
     }
 }
 
-# add this
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -126,10 +121,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 AUTH_USER_MODEL = 'users.User'
-STATIC_ROOT = os.path.join(BASE_DIR,"live-static-files", 'nca/static')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'nca/static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", 'events/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'events/media')
 MEDIA_URL ='/media/'
 
 # Email settings for MyPersonalSpace 4900 on feb 28 2020
