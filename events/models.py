@@ -28,7 +28,7 @@ class Event(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, related_name='event_staff')
     volunteer = models.ForeignKey(Volunteer, on_delete=models.DO_NOTHING, related_name='event_volunteer')
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='event_location')
-    public_event_img = models.ImageField(upload_to="events/images", null=True)
+    public_event_img = models.ImageField(upload_to="events/images", null=True, blank=True)
 
     def __str__(self):
         return self.event_name

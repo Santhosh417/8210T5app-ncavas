@@ -18,14 +18,12 @@
             {{ error }}
         <h1><label for="uname"><b>Username</b></label>
 {#        <i class="fa fa-envelope-o"></i>#}
-        <input type="text" placeholder="Enter Username" name="uname" required></h1>
+        <input type="text" placeholder="Enter Username" name="username" required></h1>
 
         <h1><label for="psw"><b>Password</b></label>
 {#        <i class="fa fa-key"></i>#}
-        <input type="password" placeholder="Enter Password" id="myInput" name="psw" required>
+        <input type="password" placeholder="Enter Password" id="myInput" name="password" required>
         <span class="eye" onclick="myFunction()">
-            <i id="hide1" class="fa fa-eye"></i>
-            <i id="hide2" class="fa fa-eye-slash"></i>
         </span>
         </h1>
 {#        <input type="text" name='username' placeholder="enter username" required/>#}
@@ -35,20 +33,13 @@
 
     <script>
     function myFunction(){
-        var x= document.getElementById("myInput");
-        var y= document.getElementById("hide1");
-        var z= document.getElementById("hide2");
+        var x= document.getElementById("myInput")
 
         if(x.type =='password'){
             x.type="text";
-            y.style.display="block";
-            z.style.display="none";
         }
         else{
             x.type="password";
-            y.style.display="none";
-            z.style.display="block";
-
         }
 
     }
