@@ -13,82 +13,79 @@
     <br>
     <br>
     {#   This is added here to display ongoing and upcoming events Oct 23 2020 #}
-    {% if public_events %}
-        <h3>Ongoing Events</h3>
-        {% for events in public_events %}
-            {% if events.start_date_time|date:"D d M Y" == now|date:"D d M Y" %}
-                <section>
-                    <div class="row">
-                        <table class="table table-unbordered table-hover">
-                            <tr>
-                                <td>
-                                     {% if events.public_event_img %}
-                                    <img src="{{events.public_event_img.url}}"  alt={{ events.event_name }} style="width:250px;height:250px; float:right;"/>
-                                        {% endif %}
-                                    <br>
-                                    <h3>
-                                        {{ events.event_name }}
-                                    </h3>
-                                    <br>
-                                    <h4>
-                                        Date </h4>
-                                    {{ events.start_date_time|date:"D d M Y" }}
-                                    <br>
-                                    <h4>
-                                        Time </h4>
-                                    {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
-                                    <br>
-                                    <h4>
-                                        Location: </h4> {{ events.location }}
-                                    <br>
-                                    {% if events.public_event_img %}
-                                    <img src="{{events.public_event_img.url}}"  alt={{ events.event_name }}>
-                                        {% endif %}
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </section>
-            {% endif %}
-        {% endfor %}
-        <h3>Upcoming events</h3>
-        {% for events in public_events %}
-            {% if events.start_date_time|date:"D d M Y" > now|date:"D d M Y" %}
-                <section>
-                    <div class="row">
-
-                        <table class="table table-unbordered table-hover">
-                            <tr>
-                                <td>
-                                    {% if events.public_event_img %}
-                                    <img src="{{events.public_event_img.url}}"  alt={{ events.event_name }} style="width:250px;height:250px; float:right;"/>
-                                        {% endif %}
-                                    <br>
-                                    <h3>
-                                        {{ events.event_name }}
-                                    </h3>
-                                    <br>
-                                    <h4>
-                                        Date </h4>
-                                    {{ events.start_date_time|date:"D d M Y" }}
-                                    to {{ events.start_date_time|date:"D d M Y" }}
-                                    <br>
-                                    <h4>
-                                        Time </h4>
-                                    {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
-                                    <br>
-                                    <h4>
-                                        Location: </h4> {{ events.location }}
-                                    <br>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </section>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+    <h3>Ongoing Events</h3>
+    {% for events in ongoing_events %}
+        <section>
+            <div class="row">
+                <table class="table table-unbordered table-hover">
+                    <tr>
+                        <td>
+                            {% if events.public_event_img %}
+                                <img src="{{ events.public_event_img.url }}"
+                                     alt={{ events.event_name }} style="width:250px;height:250px; float:right;"/>
+                            {% endif %}
+                            <br>
+                            <h4>
+                                {{ events.event_name }}
+                            </h4>
+                            <br>
+                            <h5>
+                                Date </h5>
+                            {{ events.start_date_time|date:"D d M Y" }}
+                            <br>
+                            <h5>
+                                Time </h5>
+                            {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
+                            <br>
+                            <h5>
+                                Location: </h5> {{ events.location }}
+                            <br>
+                            <h5>
+                                Description: </h5> {{ events.description }}
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    {% endfor %}
+    <h3>Upcoming events</h3>
+    {% for events in upcoming_events %}
+        <section>
+            <div class="row">
+                <table class="table table-unbordered table-hover">
+                    <tr>
+                        <td>
+                            {% if events.public_event_img %}
+                                <img src="{{ events.public_event_img.url }}"
+                                     alt={{ events.event_name }} style="width:250px;height:250px; float:right; "/>
+                            {% endif %}
+                            <br>
+                            <h4>
+                                {{ events.event_name }}
+                            </h4>
+                            <br>
+                            <h5>
+                                Date </h5>
+                            {{ events.start_date_time|date:"D d M Y" }}
+                            to {{ events.start_date_time|date:"D d M Y" }}
+                            <br>
+                            <h5>
+                                Time </h5>
+                            {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
+                            <br>
+                            <h5>
+                                Location: </h5> {{ events.location }}
+                            <br>
+                            <h5>
+                                Description: </h5> {{ events.description }}
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    {% endfor %}
 {% endblock %}
 </body>
 </html>

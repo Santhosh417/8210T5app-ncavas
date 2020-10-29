@@ -1,9 +1,12 @@
 import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.context_processors import csrf
 from django.utils import timezone
+
+from users.forms import VolunteerSignUpForm, VolunteerForm
 from .models import *
 from .forms import *
 
@@ -43,6 +46,7 @@ def edit_volunteer(request, pk):
     return render(request, 'registration/volunteer_edit.html', {'form': form})
 
 
+
 def volunteer_list(request):
     volunteers = User.objects.filter(is_customer=True)
     return render(request, 'volunteer_list.html',
@@ -68,8 +72,11 @@ def login(request):
     return render(request, 'registration/login.html',
                   {'login': login})
 
-# produces events page
+
+# produces public events page
 def events_details(request, **kwargs):
-    public = Event.objects.all().filter(event_type ='Public')
-    now= datetime.datetime.now()
-    return render(request, 'eventsPage.html', {'public_events':public,'now': now})
+    now= datetime.datetime.today()
+    ongoing_events_date = Event.objects.filter(start_date_time__date=now,event_type ='Public')
+    upcoming_events_date = Event.objects.filter(start_date_time__date__gt=now, event_type ='Public')
+
+    return render(request, 'eventsPage.html', {'now': now,'ongoing_events':ongoing_events_date,'upcoming_events': upcoming_events_date})
