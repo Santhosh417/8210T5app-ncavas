@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Volunteer, Staff, Victim
+from .models import *
 
 
 from django.http import HttpResponse
@@ -21,7 +21,7 @@ class VictimExportCsvMixin:
         response['Content-Disposition'] = 'attachment; filename=Victims_report.csv'
         writer = csv.writer(response)
         writer.writerow(field_names)
-        for victim in victims:
+        for victim in queryset:
             writer.writerow([victim.id, victim.first_name + " " + victim.last_name, victim.email, victim.mobile_num, \
                              victim.street_address, victim.city, victim.state, victim.zip, victim.disease_type,\
                              victim.notes])
@@ -42,10 +42,20 @@ class VolunteerExportCsvMixin:
         response['Content-Disposition'] = 'attachment; filename=Volunteers_report.csv'
         writer = csv.writer(response)
         writer.writerow(formatted_field_names)
-        for volunteer in volunteers:
+
+        def getSpecializations(volunteerId):
+            sps = volunteer.specialized_in.through.objects.filter(volunteer_id = volunteerId)
+            specializations = ''
+            for s in sps:
+                print(s)
+                for x in SpecializedInChoices.objects.filter(id=s.specializedinchoices_id):
+                    specializations += x.specialized_in + ', '
+            return specializations
+
+        for volunteer in queryset:
             writer.writerow([volunteer.id, volunteer.first_name + " " + volunteer.last_name, volunteer.email, volunteer.mobile_num, volunteer.work_phone,\
                              volunteer.street_address, volunteer.city, volunteer.state, volunteer.zip, volunteer.time_spent,\
-                             volunteer.specialized_in.first(), volunteer.comments])
+                             getSpecializations(volunteer.id), volunteer.comments])
 
         return response
     export_as_csv.short_description = "Export Selected as CSV"
@@ -156,3 +166,5 @@ class VictimAdmin(admin.ModelAdmin, VictimExportCsvMixin):
 admin.site.register(Volunteer, VolunteerAdmin)
 admin.site.register(Staff, StaffAdmin)
 admin.site.register(Victim, VictimAdmin)
+admin.site.register(SpecializedInChoices)
+
