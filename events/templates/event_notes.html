@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Events Notes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body>
+{% block content %}
+<br>
+<br>
+<h3 class="text-center">Victim Notes</h3>
+<p class="text-center font-italic">NOTE: Important Victim notes will be marked
+    <mark style="color:red;">RED</mark>
+</p>
+<br>
+<section>
+    <div class="row">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Victim Name</th>
+                <th>Victim Notes</th>
+                <th>Volunteer Name</th>
+                <th>Event Name</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for enrollment in enrollments %}
+            <tr>
+
+                <td>{{ enrollment.victim.first_name }}</td>
+                {% if enrollment.is_important %}
+                <td style="color:red;">{{ enrollment.notes }}</td>
+                {% else %}
+                <td>{{ enrollment.notes }}</td>
+                {% endif %}
+                <td>{{ enrollment.event.volunteer.first_name }}</td>
+                <td>{{ enrollment.event.event_name }}</td>
+                <td>{{ enrollment.event.start_date_time|time:"h:i A" }}</td>
+                <td>{{ enrollment.event.end_date_time|time:"h:i A" }}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+</body>
+</html>
+

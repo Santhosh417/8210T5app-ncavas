@@ -11,6 +11,7 @@ urlpatterns = [
     # path('edit/<int:pk>', views.edit_event, name='edit_event'),
     # path('event_list/', views.event_list, name='event_list'),
     path('events_details/', views.events_details, name='events_details'),
+    path('events_notes/', views.events_notes, name='events_notes'),
     path('', views.home, name='home'),
     re_path(r'^home/$', views.home, name='home'),
     path('about_page/', views.about, name='about'),
