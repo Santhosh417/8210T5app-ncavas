@@ -30,26 +30,26 @@
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
-{#    <li data-target="#myCarousel" data-slide-to="2"></li>#}
+    <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner w-100 h-100 text-center" role="listbox">
     <div class="carousel-item active w-100 h-100">
       <img class="img-fluid" src={% static "img/cancer_support.jpg" %} alt="First_slide">
         <div class="carousel-caption">
-          <h3>Alone we can do so little, together we can do so much</h3>
+          <div class="h3">Alone we can do so little, together we can do so much</div>
           <p>- Helen Keller</p>
         </div>
     </div>
-{#    <div class="carousel-item w-100 h-100">#}
-{#      <img class="img-fluid" src={% static "img/cancerResearch.jpg" %} alt="Second_slide">#}
-{#        <div class="carousel-caption">#}
-{#          <h3>Cancer, we are coming to get you</h3>#}
-{#        </div>#}
-{#    </div>#}
+    <div class="carousel-item w-100 h-100">
+      <img class="img-fluid" src={% static "img/cancerResearch.jpg" %} alt="Second_slide">
+        <div class="carousel-caption">
+          <div class="h3">Cancer, we are coming to get you</div>
+        </div>
+    </div>
     <div class="carousel-item w-100 h-100">
       <img class="img-fluid" src={% static "img/run_for_a_cause.jpg" %} alt="Third_slide">
         <div class="carousel-caption">
-          <h3>Register for the upcoming event : Run for a cause </h3>
+          <div class="h3">Register for the upcoming event : Run for a cause </div>
           <p>@ Elmwood park, Omaha</p>
         </div>
     </div>
@@ -65,13 +65,13 @@
 </div>
 </div>
 <div class="w-75 ml-auto mr-auto myBorder">
-    <h3 class="text-center">Read more about us</h3>
+    <div class="h3 text-center">Read more about us</div>
 </div>
 <div class="mt-5 mb-5 volunteer-story-container">
   <div class="ml-5 volunteer-story-title-container pl-2 pr-4 pb-3 text-white">
     <h2 class="ml-2 mr-3 pr-3 text-uppercase card-heading">Believe you CAN, and you are halfway THERE</h2>
     <div class="border-dark"></div>
-    <p class="mt-5 ml-2 mr-5 pr-5">Volunteers do not necessarily have the time; they just have the heart</p>
+    <span class="mt-5 ml-2 mr-5 pr-5">Volunteers do not necessarily have the time; they just have the heart</span>
       <div class="ml-2 mr-5 mb-2 text-uppercase volunteer-voice-link-container"><a href="{% url 'nca:workinprogress' %}" class="text-decoration-none text-white">Voice of our Our volunteers</a></div>
   </div>
   <div class="image-container">
@@ -83,7 +83,7 @@
   <div class="ml-5 victim-story-title-container pl-2 pr-4 pb-3 text-white">
     <h2 class="ml-2 mr-5 pr-5 text-uppercase card-heading">Finding the Positive in Every Negative</h2>
     <div class="border-dark"></div>
-    <p class="mt-5 ml-2 mr-5 pr-5">Being empathetic, courageous, and confident gives Ellena strength. </p>
+    <span class="mt-5 ml-2 mr-5 pr-5">Being empathetic, courageous, and confident gives Ellena strength. </span>
       <div class="ml-2 mr-5 mb-5 text-uppercase story-link-container"><a href="{% url 'nca:workinprogress' %}" class="text-decoration-none text-white">Read Ellena's story</a></div>
   </div>
   <div class="image-container">
