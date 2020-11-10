@@ -24,7 +24,7 @@
             {% endif %}
             <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'events:events_details' %}">Events</a></li>
             <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'nca:workinprogress' %}">Stories</a></li>
-            <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'nca:workinprogress' %}">Contact us</a></li>
+            <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'nca:contactus' %}">Contact us</a></li>
                 {% if user.is_authenticated %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle text-white d-flex flex-row" data-toggle="dropdown" role="button" aria-expanded="false">

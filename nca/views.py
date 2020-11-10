@@ -21,3 +21,5 @@ def home(request):
 def workinprogress(request):
         return render(request, 'workInProgress.html')
 
+def contactus(request):
+        return render(request, 'ContactUs.html')

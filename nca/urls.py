@@ -8,4 +8,5 @@ app_name = 'nca'
 urlpatterns = [
     path('', views.home, name="home"),
     path('workinprogress/', views.workinprogress, name="workinprogress"),
+    path('contactus/', views.contactus, name="contactus"),
 ]

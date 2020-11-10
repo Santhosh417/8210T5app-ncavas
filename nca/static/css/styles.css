@@ -160,3 +160,22 @@ h2{
 p{
     font-size:1.5vw;
 }
+
+.contactus{
+    /*margin :11px auto;*/
+    /*width:80%;*/
+    padding-top: 10px;
+    padding-bottom: 200px;
+    /*padding-right: 0px;*/
+
+}
+
+h9{
+    text-align: center;
+    /*margin-bottom: 40px;*/
+    margin-bottom: 10px;
+    /*margin-right: 250px;*/
+    margin-top: 50px;
+    font-size: 40px;
+
+}
