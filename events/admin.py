@@ -1,8 +1,12 @@
+from collections import Set
+
 from django.contrib import admin
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Location, Event, Enrollment
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import csv
+from django.core.mail import send_mail
+from django.conf import settings
 
 class LocationExportCsvMixin:
     def export_as_csv(self, request, queryset):
@@ -101,6 +105,28 @@ class EnrollmentInline(admin.TabularInline):
 class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
     list_display = ("event_name", "event_date")
     actions = ["export_as_csv"]
+    change_form_template = "event_admin.html"
+
+    def response_change(self, request, obj):
+        if "_send-reminder" in request.POST:
+            event = Event.objects.filter(event_name=obj)
+            emails = []
+            enrollments = Enrollment.objects.filter(event__in=event)
+            for enrollment in enrollments:
+                emails.append(enrollment.victim.email)
+                emails.append(enrollment.event.volunteer.email)
+
+            send_mail(
+                obj,
+                'This email is to remind you about upcoming meeting',
+                settings.EMAIL_HOST_USER,
+                emails,
+                fail_silently=True,
+            )
+
+            self.message_user(request, "Reminder emails sent")
+            return HttpResponseRedirect(".")
+        return super().response_change(request, obj)
 
     def event_date(self, instance):
         try:
@@ -127,6 +153,8 @@ class LocationAdmin(admin.ModelAdmin, LocationExportCsvMixin):
             return instance.address + ", " + instance.city + ", " + instance.state + ", " + str(instance.zip)
         except ObjectDoesNotExist:
             return 'ERROR!!'
+
+
 
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Event, ActivityAdmin)
