@@ -15,7 +15,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     re_path(r'^home/$', views.home, name='home'),
     path('about_page/', views.about, name='about'),
-    # path('accounts/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-
+    path('showevent_meetingnotes/<int:pk>/',views.showevent_meetingnotes, name='showevent_meetingnotes'),
+    path('add_meetingnotes/<int:pk>/',views.add_meetingnotes, name='add_meetingnotes'),
+    path('add_meetingnotes_success/<int:pk>/',views.add_meetingnotes, name='add_meetingnotes_success'),
 
 ]

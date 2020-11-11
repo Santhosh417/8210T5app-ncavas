@@ -57,7 +57,7 @@ def faq(request):
                   {'faq': faq})
 
 
-
+# method for volunteer log in using OTP sent in email
 def loginView(request):
     user = ''
     error = ''
@@ -85,7 +85,7 @@ def loginView(request):
 
     return render(request,'registration/login.html')
 
-
+# method for volunteer sign up
 def signup_volunteer(request):
     if request.method == 'POST':
         u = request.POST.get('first_name', '').lower() + "." + request.POST.get('last_name', '').lower();
@@ -105,6 +105,7 @@ def signup_volunteer(request):
         form = VolunteerCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+# method for sending email after volunteer registration
 def sendEmail_signup(email, pwd, username):
     # img_data = open(settings.STATIC_ROOT + "/img/NCA_Logo.PNG", 'rb').read()
     #  html_part = MIMEMultipart(_subtype='related')
@@ -127,5 +128,6 @@ def sendEmail_signup(email, pwd, username):
     # message.attach(html_part)
     message.send()
 
+# updating the website name for password reset email
 class PasswordResetNCAEmailView(PasswordResetView):
     PasswordResetView.extra_email_context = {'nca_site_name': 'Nebraska Cancer Association'}

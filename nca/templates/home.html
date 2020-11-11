@@ -10,14 +10,14 @@
         {% if events.count <= 0 %}
             <h4>Hello {{ user.first_name }} {{ user.last_name }}, you have no upcoming meetings.</h4>
         {% else %}
-          <h5>Hello {{ user.first_name }} {{ user.last_name }}, you have the following upcoming meetings:</h5>
+          <h5>Hello {{ user.first_name }} {{ user.last_name }}, you have the following meetings:</h5>
           <table class="table table-borderless">
             <tbody>
             {% for event in events %}
               <tr>
                 <td><i class="far fa-calendar-alt fa-2x"></i></td>
                   <td><h7><b>{{ event.event_name }}</b> - {% if event.event_type == "OneToOne" %}One to one meeting with {% elif event.event_type == "Group" %}Group meeting with {% else %}At{% endif %} {% for victim in event.victims %}{{ victim.first_name }} {{ victim.last_name }}{% if forloop.last %} at {% else %}, {% endif %}{% endfor %}{{ event.location }}. Timings : from {{ event.start_date_time }} to {{ event.end_date_time }}</h7></td>
-                <td>{% if event.event_type != "Public" %}<a href="{% url 'nca:workinprogress'%}" class="btn btn-outline-dark">Take notes</a>{% endif %}</td>
+                <td>{% if event.event_type != "Public" %}<a href="{% url 'events:showevent_meetingnotes' event.event_id%}" class="btn btn-outline-dark">Take notes</a>{% endif %}</td>
               </tr>
             {% endfor %}
             </tbody>

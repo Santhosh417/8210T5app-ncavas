@@ -24,7 +24,7 @@ class Event(models.Model):
     start_date_time = models.DateTimeField()
     end_date_time = models.DateTimeField()
     description = models.CharField(max_length=300, null=True, blank=True)
-    is_important = models.BooleanField(default=False)
+    is_important = models.BooleanField('Victim needs urgent attention!!',default=False, blank=True)
     staff = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, related_name='event_staff')
     volunteer = models.ForeignKey(Volunteer, on_delete=models.DO_NOTHING, related_name='event_volunteer')
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='event_location')
@@ -41,7 +41,7 @@ class Enrollment(models.Model):
     victim = models.ForeignKey(Victim, on_delete=models.DO_NOTHING,
                                   related_name='enrollment_victim')
     notes = models.CharField(max_length=300, null=True, blank=True)
-    is_important = models.BooleanField(default=False)
+    is_important = models.BooleanField('Victim needs urgent attention!!',default=False, blank=True)
 
     def __str__(self):
         return self.victim.first_name

@@ -1,4 +1,5 @@
 import datetime
+from datetime import datetime, timedelta
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -88,3 +89,45 @@ def events_notes(request, **kwargs):
     old_events = Event.objects.filter(end_date_time__date__lt=now)
     enrollments = Enrollment.objects.filter(Q(event__in=old_events))
     return render(request, 'event_notes.html', {'now': now,'enrollments':enrollments})
+
+
+
+# method for volunteer to take event notes Nov 6
+
+# show the event notes by volunteer
+def showevent_meetingnotes(request,pk):
+    event = Event.objects.filter(event_id=pk).first()
+    enrollments = Enrollment.objects.filter(event_id=pk)
+    form = VolunteerMeetingNotesForm(initial=event)
+    # setting the time to show the events to be able to add/edit until end of the day
+    now = datetime.today()
+    now = now.replace(second=0, microsecond=0)
+    eod = datetime(
+        year=event.end_date_time.year,
+        month=event.end_date_time.month,
+        day=event.end_date_time.day
+    ) + timedelta(days=1, microseconds=-1)
+
+    return render(request, 'MakeMeetingnotes.html', {'form': form,'enrollments':enrollments,'eod':eod,'now':now})
+
+## add/edit victims meeting notes for the event by volunteer
+def add_meetingnotes(request, pk):
+    enrollment = Enrollment.objects.filter(enrollment_id=pk).first()
+
+    if request.method == 'POST':
+        form = AddMeetingNotesForm(request.POST, instance=enrollment)
+        if form.is_valid():
+            add_enrollment=form.save(commit=False)
+            add_enrollment.event= enrollment.event
+            add_enrollment.victim= enrollment.victim
+            add_enrollment.save()
+
+            return render(request, 'AddMeetingnotes_successful.html', {'enrollment': enrollment})
+        else:
+            return render(request, 'AddMeetingnotes.html', {'form': form,'victim':enrollment.victim,'event':enrollment.event })
+
+    else:
+        form = AddMeetingNotesForm(instance=enrollment)
+        return render(request, 'AddMeetingnotes.html', {'form': form,'victim':enrollment.victim,'event':enrollment.event})
+
+
