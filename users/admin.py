@@ -47,7 +47,6 @@ class VolunteerExportCsvMixin:
             sps = volunteer.specialized_in.through.objects.filter(volunteer_id = volunteerId)
             specializations = ''
             for s in sps:
-                print(s)
                 for x in SpecializedInChoices.objects.filter(id=s.specializedinchoices_id):
                     specializations += x.specialized_in + ', '
             return specializations

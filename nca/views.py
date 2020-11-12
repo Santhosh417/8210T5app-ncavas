@@ -28,14 +28,12 @@ def home(request):
 
 
     for x in events:
-        print(x.event_id)
         enrollments = Enrollment.objects.filter(event_id=x.event_id)
         location = Location.objects.filter(location_id=x.location_id)
         victims = []
         for y in enrollments:
             victims += list(User.objects.filter(id=y.victim_id))
         x.victims = victims
-        print(x.victims)
     return render(request, 'home.html', {'events': events})
 
 
