@@ -116,7 +116,7 @@ class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
                 for enrollment in enrollments:
                     emails.append(enrollment.victim.email)
                     emails.append(enrollment.event.volunteer.email)
-                body = 'This email is to remind you about upcoming meeting starts at ' + enrollments[0].event.start_date_time
+                body = 'This email is to remind you about upcoming meeting'
                 send_mail(
                     obj,
                     body,
