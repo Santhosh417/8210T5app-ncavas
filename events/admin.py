@@ -1,12 +1,11 @@
-from collections import Set
-
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Location, Event, Enrollment
 from django.http import HttpResponse, HttpResponseRedirect
 import csv
 from django.core.mail import send_mail
 from django.conf import settings
+from datetime import date
 
 class LocationExportCsvMixin:
     def export_as_csv(self, request, queryset):
@@ -109,22 +108,24 @@ class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
 
     def response_change(self, request, obj):
         if "_send-reminder" in request.POST:
-            event = Event.objects.filter(event_name=obj)
             emails = []
-            enrollments = Enrollment.objects.filter(event__in=event)
-            for enrollment in enrollments:
-                emails.append(enrollment.victim.email)
-                emails.append(enrollment.event.volunteer.email)
+            enrollments = Enrollment.objects.filter(event__event_name=obj).exclude(event__start_date_time__date__lt = date.today())
+            if len(enrollments)==0:
+                messages.error(request, "Event completed already. Cannot send reminders")
+            else:
+                for enrollment in enrollments:
+                    emails.append(enrollment.victim.email)
+                    emails.append(enrollment.event.volunteer.email)
+                body = 'This email is to remind you about upcoming meeting starts at ' + enrollments[0].event.start_date_time
+                send_mail(
+                    obj,
+                    body,
+                    settings.EMAIL_HOST_USER,
+                    emails,
+                    fail_silently=True,
+                )
+                self.message_user(request, "Reminder emails sent")
 
-            send_mail(
-                obj,
-                'This email is to remind you about upcoming meeting',
-                settings.EMAIL_HOST_USER,
-                emails,
-                fail_silently=True,
-            )
-
-            self.message_user(request, "Reminder emails sent")
             return HttpResponseRedirect(".")
         return super().response_change(request, obj)
 
