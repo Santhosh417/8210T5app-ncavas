@@ -1,5 +1,4 @@
-import datetime
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -9,7 +8,6 @@ from django.utils import timezone
 from django.db.models import Q
 
 from users.forms import VolunteerSignUpForm, VolunteerForm
-from .models import *
 from .forms import *
 
 now = timezone.now()
@@ -77,7 +75,7 @@ def login(request):
 
 # produces public events page
 def events_details(request, **kwargs):
-    now= datetime.datetime.today()
+    now= datetime.today()
     ongoing_events_date = Event.objects.filter(start_date_time__date=now,event_type ='Public')
     upcoming_events_date = Event.objects.filter(start_date_time__date__gt=now, event_type ='Public')
 
@@ -85,7 +83,7 @@ def events_details(request, **kwargs):
 
 # To view event notes for admins
 def events_notes(request, **kwargs):
-    now= datetime.datetime.today()
+    now= datetime.today()
     old_events = Event.objects.filter(end_date_time__date__lt=now)
     enrollments = Enrollment.objects.filter(Q(event__in=old_events))
     return render(request, 'event_notes.html', {'now': now,'enrollments':enrollments})
