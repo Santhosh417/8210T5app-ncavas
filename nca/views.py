@@ -21,8 +21,8 @@ def home(request):
         if eod > now:
             current_event_ids.append(event.event_id)
 
-        # getting the current happening events and merging to events
-    current_events = Event.objects.filter(event_id__in=current_event_ids)
+    # getting the current happening events and merging to events
+    current_events = Event.objects.filter(volunteer_id=request.user.id, event_id__in=current_event_ids)
     events = upcoming_events | current_events
     events = events.order_by("end_date_time")
 
