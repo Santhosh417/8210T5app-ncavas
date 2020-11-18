@@ -209,9 +209,6 @@ h2{
     font-size:2.5vw;
 }
 
-p{
-    font-size:1.5vw;
-}
 
 .contactus{
     /*margin :11px auto;*/
@@ -232,10 +229,99 @@ h9{
 
 }
 
+.custom-form {
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 100px;
+}
+
+.custom-form p label {
+    width: 15%;
+    float: none !important;
+}
+
+.custom-form p input {
+    float: none !important;
+    background-color: white;
+    border: 1px solid;
+}
+
+.custom-form input,select {
+    height: 35px;
+    width: 200px;
+}
+
+.custom-form p span  {
+    display: block;
+    margin-left: 15%;
+}
+.custom-form ul {
+    margin-left: 13%;
+}
+
+.full-screen-height {
+    height: 26vw;
+}
+
+form.login-form-container p, form.login-form-container div{
+    text-align: center !important;
+}
+
+.btn-primary {
+    background-color: #9946b2 !important;
+    border-color: #9946b2 !important;
+}
+
+.card form {
+    max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
+    margin: auto;
+}
+
 @media only screen
     and (device-width : 375px)
     and (device-height : 812px)
     and (-webkit-device-pixel-ratio : 3) {
+
+    .card form {
+        max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
+        margin: auto;
+        font-size: 2vw;
+    }
+
+    .btn-primary{
+        background-color:  #9946b2 !important;
+        border-color:  #9946b2 !important;
+        font-size: 2vw;
+    }
+
+    p{
+        font-size: 2vw;
+        margin-bottom: 0;
+    }
+
+    h3{
+        font-size: 3vw;
+    }
+
+    .custom-form input, select {
+        height: 20px;
+        width: 150px;
+    }
+
+    .custom-form ul{
+        font-size: 2vw;
+    }
+
+    .custom-form{
+        font-size: 2vw;
+        margin-bottom: 20px;
+    }
+
+    .full-screen-height{
+        height: 81vw;
+    }
 
     .volunteer-story-title-container{
         background-color: white;

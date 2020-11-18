@@ -1,37 +1,27 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <style>
-        .card form {
-            max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
-            margin: auto;
-        }
-    </style>
-</head>
-
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Login</h2>
-    <div class="input-box"></div>
-        <form method="post" >
-        {% csrf_token %}
+    <div class="full-screen-height">
+        <h3>Login</h3>
+        <form method="post" class="m-5 custom-form" >
+            {% csrf_token %}
             {{ error }}
-        <h1><label for="uname"><b>Username</b></label>
-{#        <i class="fa fa-envelope-o"></i>#}
-        <input type="text" placeholder="Enter Username" name="username" required></h1>
-
-        <h1><label for="psw"><b>Password</b></label>
-{#        <i class="fa fa-key"></i>#}
-        <input type="password" placeholder="Enter Password" id="myInput" name="password" required>
-        <span class="eye" onclick="myFunction()">
-        </span>
-        </h1>
-{#        <input type="text" name='username' placeholder="enter username" required/>#}
-{#        <input type="text" name='password' placeholder="enter password" required/>#}
-        <h1><button  class="login-btn"><a  style="color: black" href="{% url 'users:password_reset_form' %}">Forgot Password ?</a></button>
-            <button type="submit" class="login-btn">Submit</button></h1>
+            <div class="row mb-2">
+                <label for="uname" class="mr-2"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+            </div>
+            <div class="row mb-2">
+                <label for="psw" class="mr-2"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="myInput" name="password" required>
+                <span class="eye" onclick="myFunction()"></span>
+            </div>
+            <div class="row mb-2">
+                 <button class="btn-sm btn-primary" type="submit">Log In</button>
+            </div>
+            <span id="password-reset-link"><a href="{% url 'users:password_reset_form' %}">Forgotten your  password?</a></span>
       </form>
-
+    </div>
     <script>
     function myFunction(){
         var x= document.getElementById("myInput")
@@ -49,8 +39,5 @@
 {% endblock %}
 
 </html>
-
-
----------------Update-------------
 
 
