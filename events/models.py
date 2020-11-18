@@ -36,7 +36,7 @@ class Event(models.Model):
 
 class Enrollment(models.Model):
     enrollment_id = models.AutoField(primary_key=True)
-    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING,
+    event = models.ForeignKey(Event, on_delete=models.CASCADE,
                               related_name='enrollment_event')
     victim = models.ForeignKey(Victim, on_delete=models.DO_NOTHING,
                                   related_name='enrollment_victim')
