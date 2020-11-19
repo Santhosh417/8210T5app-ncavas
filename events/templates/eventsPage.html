@@ -13,35 +13,41 @@
     <br>
     <br>
     {#   This is added here to display ongoing and upcoming events Oct 23 2020 #}
-    <h3>Ongoing Events</h3>
+    <div class="row p-2 bg-pink">
+        <h3>Ongoing Events</h3>
+    </div>
     {% for events in ongoing_events %}
         <section>
             <div class="row">
-                <table class="table table-unbordered table-hover">
+                <table class="p-2 table table-unbordered table-hover">
                     <tr>
                         <td>
                             {% if events.public_event_img %}
                                 <img src="{{ events.public_event_img.url }}"
-                                     alt={{ events.event_name }} style="width:250px;height:250px; float:right;"/>
+                                     alt='{{ events.event_name }}' class="events-img img-fluid" />
                             {% endif %}
                             <br>
-                            <h4>
+                            <h3>
                                 {{ events.event_name }}
-                            </h4>
+                            </h3>
                             <br>
-                            <h5>
-                                Date </h5>
-                            {{ events.start_date_time|date:"D d M Y" }}
+                            <h6>
+                                Date
+                                {{ events.start_date_time|date:"D d M Y" }}
+                            </h6>
                             <br>
-                            <h5>
-                                Time </h5>
-                            {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
+                            <h6>
+                                Time
+                                {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
+                            </h6>
                             <br>
-                            <h5>
-                                Location: </h5> {{ events.location }}
+                            <h6>
+                                Location:  {{ events.location }}
+                            </h6>
                             <br>
-                            <h5>
-                                Description: </h5> {{ events.description }}
+                            <h6>
+                                Description: {{ events.description }}
+                            </h6>
                             <br>
                         </td>
                     </tr>
@@ -49,36 +55,40 @@
             </div>
         </section>
     {% endfor %}
-    <h3>Upcoming events</h3>
+    <div class="row p-2 bg-pink">
+        <h3>Upcoming events</h3>
+    </div>
     {% for events in upcoming_events %}
         <section>
             <div class="row">
-                <table class="table table-unbordered table-hover">
+                <table class="p-2 table table-unbordered table-hover">
                     <tr>
                         <td>
                             {% if events.public_event_img %}
-                                <img src="{{ events.public_event_img.url }}"
-                                     alt={{ events.event_name }} style="width:250px;height:250px; float:right; "/>
+                                <img src='{{ events.public_event_img.url }}'
+                                     alt='{{ events.event_name }}' class="events-img img-fluid" />
                             {% endif %}
                             <br>
-                            <h4>
+                            <h3>
                                 {{ events.event_name }}
-                            </h4>
+                            </h3>
                             <br>
-                            <h5>
-                                Date </h5>
+                            <h6>
+                                Date
                             {{ events.start_date_time|date:"D d M Y" }}
                             to {{ events.start_date_time|date:"D d M Y" }}
+                                </h6>
                             <br>
-                            <h5>
-                                Time </h5>
+                            <h6>
+                                Time
                             {{ events.start_date_time|time:"h:i A" }} to {{ events.end_date_time|time:"h:i A" }}
+                                </h6>
                             <br>
-                            <h5>
-                                Location: </h5> {{ events.location }}
+                            <h6>
+                                Location:  {{ events.location }}</h6>
                             <br>
-                            <h5>
-                                Description: </h5> {{ events.description }}
+                            <h6>
+                                Description: {{ events.description }}</h6>
                             <br>
                         </td>
                     </tr>

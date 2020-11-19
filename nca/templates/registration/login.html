@@ -4,7 +4,7 @@
 {% block content %}
     <div class="full-screen-height">
         <h3>Login</h3>
-        <form method="post" class="m-5 custom-form" >
+        <form method="post" class="custom-form" >
             {% csrf_token %}
             {{ error }}
             <div class="row mb-2">
@@ -19,7 +19,7 @@
             <div class="row mb-2">
                  <button class="btn-sm btn-primary" type="submit">Log In</button>
             </div>
-            <span id="password-reset-link"><a href="{% url 'users:password_reset_form' %}">Forgotten your  password?</a></span>
+            <h6 class="row mb-2" id="password-reset-link"><a href="{% url 'users:password_reset_form' %}">Forgotten your  password?</a></h6>
       </form>
     </div>
     <script>

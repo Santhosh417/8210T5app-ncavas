@@ -206,9 +206,14 @@ h2{
 
 
 .h3{
-    font-size:2.5vw;
+    font-size:1vw;
 }
 
+.events-img{
+    width:250px;
+    height:250px;
+    float:right;
+}
 
 .contactus{
     /*margin :11px auto;*/
@@ -279,10 +284,30 @@ form.login-form-container p, form.login-form-container div{
     margin: auto;
 }
 
+.bg-pink{
+    background-color: lightpink;
+}
+
 @media only screen
     and (device-width : 375px)
     and (device-height : 812px)
     and (-webkit-device-pixel-ratio : 3) {
+
+    .fa-2x {
+        font-size: 5vw;
+    }
+    .h6{
+         font-size: 2vw;
+    }
+
+    .h3{
+        font-size: 3vw;
+        font-weight: bold;
+    }
+
+    h6{
+        font-size: 2vw !important;
+    }
 
     .card form {
         max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
@@ -293,6 +318,10 @@ form.login-form-container p, form.login-form-container div{
     .btn-primary{
         background-color:  #9946b2 !important;
         border-color:  #9946b2 !important;
+        font-size: 2vw;
+    }
+
+    .btn-secondary{
         font-size: 2vw;
     }
 
@@ -430,5 +459,11 @@ form.login-form-container p, form.login-form-container div{
 
     .take-notes-btn{
         font-size: 8px !important;
+    }
+
+    .events-img{
+        width:100px;
+        height:100px;
+        float:right;
     }
 }
