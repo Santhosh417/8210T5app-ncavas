@@ -115,11 +115,6 @@
     margin-left: .5rem!important;
     margin-bottom: .5rem!important;
 }
-/*Remove while removing the work in progress page*/
-.wip{
-    padding-left: 100px;
-    height: 500px;
-}
 
 footer{
     background-color: #9946b2;
@@ -294,6 +289,10 @@ form.login-form-container p, form.login-form-container div{
     and (device-width : 375px)
     and (device-height : 812px)
     and (-webkit-device-pixel-ratio : 3) {
+
+    .content-container{
+    min-height: 39vh;
+    }
 
     .fa-2x {
         font-size: 5vw;
