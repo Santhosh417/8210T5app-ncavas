@@ -6,7 +6,6 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <div class="container">
         {% if events.count <= 0 %}
             <div class="home-header">Hello {{ user.first_name }} {{ user.last_name }}, you have no upcoming meetings.</div>
         {% else %}
@@ -22,7 +21,6 @@
             {% endfor %}
             </tbody>
           </table>
-        </div>
         {% endif %}
     {% endif %}
 <div class="mb-5">

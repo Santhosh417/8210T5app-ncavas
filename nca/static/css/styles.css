@@ -123,6 +123,8 @@
 
 footer{
     background-color: #9946b2;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer_heading{
@@ -266,10 +268,6 @@ h9{
     margin-left: 13%;
 }
 
-.full-screen-height {
-    height: 26vw;
-}
-
 form.login-form-container p, form.login-form-container div{
     text-align: center !important;
 }
@@ -286,6 +284,10 @@ form.login-form-container p, form.login-form-container div{
 
 .bg-pink{
     background-color: lightpink;
+}
+
+.content-container{
+    min-height: 100vh;
 }
 
 @media only screen
@@ -346,10 +348,6 @@ form.login-form-container p, form.login-form-container div{
     .custom-form{
         font-size: 2vw;
         margin-bottom: 20px;
-    }
-
-    .full-screen-height{
-        height: 81vw;
     }
 
     .volunteer-story-title-container{

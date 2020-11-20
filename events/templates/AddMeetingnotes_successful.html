@@ -14,12 +14,10 @@
 {% block title %}Meeting Notes - Thank you{% endblock title %}
 
 {% block content %}
-    <div class="full-screen-height">
     <div class="card mb-5">
         <h6>Thank you. The meeting notes for the victim - <b>{{ enrollment.victim }}</b> at event - "{{ enrollment.event }}" has been updated successfully.</h6>
         <h6 class="mt-3"><a href='{% url 'events:showevent_meetingnotes' enrollment.event.event_id %}'>+ Add another victim's notes</a></h6>
     </div>
       <a href='{% url 'nca:home' %}' class="mt-3 btn-sm btn-secondary">Back to Home</a>
-    </div>
 {% endblock content %}
 </html>
