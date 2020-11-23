@@ -16,6 +16,9 @@
     <div class="row p-2 bg-pink">
         <h3>Ongoing Events</h3>
     </div>
+    {% if ongoing_events.count == 0 %}
+    <h6> No Ongoing events today</h6>
+    {% endif %}
     {% for events in ongoing_events %}
         <section>
             <div class="row">
@@ -58,6 +61,9 @@
     <div class="row p-2 bg-pink">
         <h3>Upcoming events</h3>
     </div>
+    {% if upcoming_events.count == 0 %}
+    <h6> No Upcoming events planned</h6>
+    {% endif %}
     {% for events in upcoming_events %}
         <section>
             <div class="row">
