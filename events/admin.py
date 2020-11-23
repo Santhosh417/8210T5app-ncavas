@@ -113,13 +113,6 @@ class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
     actions = ["export_as_csv"]
     change_form_template = "event_admin.html"
 
-    def event_date(self, instance):
-        try:
-            return instance.event.start_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime(
-                "%A, %d %b %Y %H:%M") + " to " + instance.event.end_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%A, %d %b %Y %H:%M")
-        except ObjectDoesNotExist:
-            return 'ERROR!!'
-
     def response_change(self, request, obj):
         if "_send-reminder" in request.POST:
             emails = []
@@ -153,7 +146,7 @@ NCA Team
 
     def event_date(self, instance):
         try:
-            return instance.start_date_time.strftime("%A, %d %b %Y %H:%M") + " to " + instance.end_date_time.strftime(
+            return instance.start_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%A, %d %b %Y %H:%M") + " to " + instance.end_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime(
                 "%A, %d %b %Y %H:%M")
         except ObjectDoesNotExist:
             return 'ERROR!!'
