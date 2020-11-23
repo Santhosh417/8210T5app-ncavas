@@ -6,7 +6,7 @@ import csv
 from django.core.mail import send_mail
 from django.conf import settings
 from datetime import date
-
+import pytz
 
 class LocationExportCsvMixin:
     def export_as_csv(self, request, queryset):
@@ -39,8 +39,8 @@ class EventExportCsvMixin:
         writer.writerow(field_names)
         for event in queryset:
             writer.writerow([event.event_id, event.event_name, event.event_type, \
-                             event.start_date_time.strftime("%A, %d %b %Y %H:%M"), \
-                             event.end_date_time.strftime("%A, %d %b %Y %H:%M"), event.description, \
+                             event.start_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%A, %d %b %Y %H:%M"), \
+                             event.end_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%A, %d %b %Y %H:%M"), event.description, \
                              event.staff.first_name + " " + event.staff.last_name, \
                              event.volunteer.first_name + " " + event.volunteer.last_name, \
                              event.location.address + ", " + \
@@ -86,8 +86,8 @@ class EnrollmentAdmin(admin.ModelAdmin, EnrollmentExportCsvMixin):
 
     def event_date(self, instance):
         try:
-            return instance.event.start_date_time.strftime(
-                "%A, %d %b %Y %H:%M") + " to " + instance.event.end_date_time.strftime("%A, %d %b %Y %H:%M")
+            return instance.event.start_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime(
+                "%A, %d %b %Y %H:%M") + " to " + instance.event.end_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%A, %d %b %Y %H:%M")
         except ObjectDoesNotExist:
             return 'ERROR!!'
 
@@ -113,6 +113,13 @@ class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
     actions = ["export_as_csv"]
     change_form_template = "event_admin.html"
 
+    def event_date(self, instance):
+        try:
+            return instance.event.start_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime(
+                "%A, %d %b %Y %H:%M") + " to " + instance.event.end_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%A, %d %b %Y %H:%M")
+        except ObjectDoesNotExist:
+            return 'ERROR!!'
+
     def response_change(self, request, obj):
         if "_send-reminder" in request.POST:
             emails = []
@@ -124,7 +131,6 @@ class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
                 for enrollment in enrollments:
                     emails.append(enrollment.victim.email)
                     emails.append(enrollment.event.volunteer.email)
-                startDate = enrollments[0].event.start_date_time
                 body = ('''Hello,
 
 This email is a reminder for an upcoming meeting you have on ''' + str(enrollments[0].event.start_date_time.strftime("%m/%d/%Y, %H:%M")) +

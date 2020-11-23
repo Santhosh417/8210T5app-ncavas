@@ -4,7 +4,8 @@ from django.shortcuts import render
 from django.utils import timezone
 from events.models import Event, Enrollment, Location
 from users.models import User
-
+import pytz
+from django.conf import settings
 
 def home(request):
     upcoming_events = Event.objects.filter(volunteer_id=request.user.id, start_date_time__gte=timezone.now())
@@ -14,10 +15,11 @@ def home(request):
 
  # set end of the day based on end date time for events
     for event in Event.objects.all():
+        end_date_time = event.end_date_time.astimezone(pytz.timezone(settings.TIME_ZONE))
         eod = datetime(
-            year=event.end_date_time.year,
-            month=event.end_date_time.month,
-            day=event.end_date_time.day) + timedelta(days=1, microseconds=-1)
+            year=end_date_time.year,
+            month=end_date_time.month,
+            day=end_date_time.day) + timedelta(days=1, microseconds=-1)
         if eod > now:
             current_event_ids.append(event.event_id)
 
