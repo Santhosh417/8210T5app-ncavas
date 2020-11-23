@@ -6,7 +6,6 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <div class="container">
         {% if events.count <= 0 %}
             <div class="home-header">Hello {{ user.first_name }} {{ user.last_name }}, you have no upcoming meetings.</div>
         {% else %}
@@ -22,7 +21,6 @@
             {% endfor %}
             </tbody>
           </table>
-        </div>
         {% endif %}
     {% endif %}
 <div class="mb-5">
@@ -41,7 +39,7 @@
         </div>
     </div>
     <div class="carousel-item w-100 h-100">
-      <img class="img-fluid" src={% static "img/cancerResearch.jpg" %} alt="Second_slide">
+      <img class="img-fluid" src={% static "img/cancerresearch.jpg" %} alt="Second_slide">
         <div class="carousel-caption">
           <div class="h3">Cancer, we are coming to get you</div>
         </div>

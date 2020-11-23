@@ -7,13 +7,8 @@
 {% block title %}Thank you for registering{% endblock title %}
 
 {% block content %}
-<h3 style="font-family: cursive;color: darkred">Thank you for registering</h3>
-    <h4>An email has been sent to the registered email with your username and one time password.Please check and login.</h4>
-
-
-
-
-  <button class="btn btn-success"><a   style="color: white" href="{% url 'users:login' %}">Click here to Login</a></button>
-
+    <h3>Thank you for registering</h3>
+    <h6>An email has been sent to the registered email with your username and one time password.Please check and login.</h6>
+    <button class="btn-sm btn-primary"><a class="text-white" href="{% url 'users:login' %}">Click here to Login</a></button>
 {% endblock content %}
 </html>

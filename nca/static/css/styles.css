@@ -115,14 +115,11 @@
     margin-left: .5rem!important;
     margin-bottom: .5rem!important;
 }
-/*Remove while removing the work in progress page*/
-.wip{
-    padding-left: 100px;
-    height: 500px;
-}
 
 footer{
     background-color: #9946b2;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer_heading{
@@ -206,9 +203,14 @@ h2{
 
 
 .h3{
-    font-size:2.5vw;
+    font-size:1vw;
 }
 
+.events-img{
+    width:250px;
+    height:250px;
+    float:right;
+}
 
 .contactus{
     /*margin :11px auto;*/
@@ -261,10 +263,6 @@ h9{
     margin-left: 13%;
 }
 
-.full-screen-height {
-    height: 26vw;
-}
-
 form.login-form-container p, form.login-form-container div{
     text-align: center !important;
 }
@@ -279,10 +277,38 @@ form.login-form-container p, form.login-form-container div{
     margin: auto;
 }
 
+.bg-pink{
+    background-color: lightpink;
+}
+
+.content-container{
+    min-height: 100vh;
+}
+
 @media only screen
     and (device-width : 375px)
     and (device-height : 812px)
     and (-webkit-device-pixel-ratio : 3) {
+
+    .content-container{
+    min-height: 39vh;
+    }
+
+    .fa-2x {
+        font-size: 5vw;
+    }
+    .h6{
+         font-size: 2vw;
+    }
+
+    .h3{
+        font-size: 3vw;
+        font-weight: bold;
+    }
+
+    h6{
+        font-size: 2vw !important;
+    }
 
     .card form {
         max-width: 100%; /* Handles the responsive part, it will cause your form to scale with a max-width of 100% */
@@ -293,6 +319,10 @@ form.login-form-container p, form.login-form-container div{
     .btn-primary{
         background-color:  #9946b2 !important;
         border-color:  #9946b2 !important;
+        font-size: 2vw;
+    }
+
+    .btn-secondary{
         font-size: 2vw;
     }
 
@@ -317,10 +347,6 @@ form.login-form-container p, form.login-form-container div{
     .custom-form{
         font-size: 2vw;
         margin-bottom: 20px;
-    }
-
-    .full-screen-height{
-        height: 81vw;
     }
 
     .volunteer-story-title-container{
@@ -430,5 +456,11 @@ form.login-form-container p, form.login-form-container div{
 
     .take-notes-btn{
         font-size: 8px !important;
+    }
+
+    .events-img{
+        width:100px;
+        height:100px;
+        float:right;
     }
 }

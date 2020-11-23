@@ -16,13 +16,14 @@
 {% block content %}
     <div class="card">
         <form method="POST">{% csrf_token %}
-            <h4>Meeting Notes for {{ victim }} - <small>{{ event }}</small></h4>   <br>
+            <h3>Meeting Notes for {{ victim }} - <small>{{ event }}</small></h3>   <br>
             {{ form|crispy }}
             <br>
             <a href='{% url 'events:showevent_meetingnotes' event.event_id %}'>+ Add another victim's notes</a>
-            <p></p>
-            <button type="submit" class="save btn btn-primary">Update</button>
-            <a href='{% url 'events:showevent_meetingnotes' event.event_id %}' class="btn btn-secondary">Cancel</a>
+            <div>
+                <button type="submit" class="save btn-sm btn-primary">Update</button>
+                <a href='{% url 'events:showevent_meetingnotes' event.event_id %}' class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 {% endblock content %}
