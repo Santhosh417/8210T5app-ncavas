@@ -126,7 +126,7 @@ class ActivityAdmin(admin.ModelAdmin, EventExportCsvMixin):
                     emails.append(enrollment.event.volunteer.email)
                 body = ('''Hello,
 
-This email is a reminder for an upcoming meeting you have on ''' + str(enrollments[0].event.start_date_time.strftime("%m/%d/%Y, %H:%M")) +
+This email is a reminder for an upcoming meeting you have on ''' + str(enrollments[0].event.start_date_time.astimezone(pytz.timezone(settings.TIME_ZONE)).strftime("%m/%d/%Y, %H:%M")) +
 '''. Please contact NCA email for futher details.
 
 Thanks
