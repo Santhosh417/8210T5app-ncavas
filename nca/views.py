@@ -44,3 +44,6 @@ def workinprogress(request):
 
 def contactus(request):
         return render(request, 'ContactUs.html')
+
+def faq(request):
+        return render(request, 'faq.html')
