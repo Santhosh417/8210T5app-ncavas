@@ -37,7 +37,9 @@
 
                         <ul class="dropdown-menu text-white user-actions-dropdown" role="menu">
                             <li><a href="{% url 'password_change' %}" class="text-white">Change password</a></li>
-                            <li><a href="{% url 'users:edit_volunteer' user.pk  %}" class="text-white">Edit Profile</a></li>
+                             {% if not user.is_staff  %}
+                                <li><a href="{% url 'users:edit_volunteer' user.pk  %}" class="text-white">Edit Profile</a></li>
+                            {% endif %}
                             <li class="nav-item"><a href="{% url 'logout' %}" class="text-white">Logout</a></li>
 
                         </ul>
