@@ -17,9 +17,13 @@ class VolunteerSignUpForm(UserCreationForm):
 
 
 class VolunteerForm(forms.ModelForm):
+    specialized_in = forms.ModelMultipleChoiceField(label='Specialized in?', queryset=SpecializedInChoices.objects.all(), required=False,
+                                                    widget=forms.CheckboxSelectMultiple,)
     class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email', 'mobile_num')
+        model = Volunteer
+        fields = ('first_name', 'last_name', 'email', 'mobile_num',
+                  'work_phone', 'street_address', 'city', 'state', 'zip',
+                  'time_spent', 'specialized_in')
 
 
 class VolunteerCreationForm(UserCreationForm):
@@ -38,7 +42,6 @@ class VolunteerCreationForm(UserCreationForm):
         model = Volunteer
         fields = ('first_name', 'last_name', 'email','mobile_num', 'work_phone', 'street_address', 'city', 'state',
                   'zip', 'time_spent', 'specialized_in', 'comments',)
-
 
     def __init__(self, *args, **kwargs):
         super(VolunteerCreationForm, self).__init__(*args, **kwargs)

@@ -30,20 +30,20 @@ def register_volunteer(request):
     return render(request, 'registration/volunteer_registration_form.html', args)
 
 
-@login_required
-def edit_volunteer(request, pk):
-    volunteer = get_object_or_404(User, pk=pk)
-    if request.method == "POST":
-        # update
-        form = VolunteerForm(request.POST, instance=volunteer)
-        if form.is_valid():
-            volunteer = form.save(commit=False)
-            volunteer.save()
-            return redirect('shop:product_list')
-    else:
-        # edit
-        form = VolunteerForm(instance=volunteer)
-    return render(request, 'registration/volunteer_edit.html', {'form': form})
+# @login_required
+# def edit_volunteer(request, pk):
+#     volunteer = get_object_or_404(User, pk=pk)
+#     if request.method == "POST":
+#         # update
+#         form = VolunteerForm(request.POST, instance=volunteer)
+#         if form.is_valid():
+#             volunteer = form.save(commit=False)
+#             volunteer.save()
+#             return redirect('users:volunteer_list')
+#     else:
+#         # edit
+#         form = VolunteerForm(instance=volunteer)
+#     return render(request, 'users/volunteer_edit.html', {'form': form})
 
 
 

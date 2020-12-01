@@ -1,17 +1,13 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
-from .forms import *
-from django.contrib.auth.views import PasswordResetView
-# start for email setting _signup
-from django.template.loader import get_template
-from django.core.mail import  EmailMultiAlternatives
 from django.conf import settings
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView
+from django.core.mail import EmailMultiAlternatives
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import get_template
+from django.utils import timezone
 
+from .forms import *
 
 now = timezone.now()
 def home(request):
@@ -22,40 +18,31 @@ def home(request):
 
 @login_required
 def edit_volunteer(request, pk):
-    volunteer = get_object_or_404(User, pk=pk)
+    volunteer = get_object_or_404(Volunteer, pk=pk)
     if request.method == "POST":
         # update
         form = VolunteerForm(request.POST, instance=volunteer)
         if form.is_valid():
             volunteer = form.save(commit=False)
             volunteer.save()
-            return redirect('shop:product_list')
+            form.save_m2m()
+            specialized_choices = volunteer.specialized_in.all()
+            specialized_choices_str = ''
+            for choice in specialized_choices:
+                    specialized_choices_str += str(choice)
+                    specialized_choices_str += ','
+            volunteer.specialized_choices =  specialized_choices_str[:-1]
+            return render(request, 'volunteer_detail.html',
+                  {'object': volunteer})
     else:
         # edit
         form = VolunteerForm(instance=volunteer)
-    return render(request, 'registration/volunteer_edit.html', {'form': form})
-
+    return render(request, 'volunteer_edit.html', {'form': form})
 
 def volunteer_list(request):
     volunteers = User.objects.filter(is_customer=True)
     return render(request, 'volunteer_list.html',
                   {'volunteers': volunteers})
-
-
-def home(request):
-    return render(request, 'stitchmaster/stitchmaster_homepage.html',
-                  {'home': home})
-
-
-def about(request):
-    return render(request, 'stitchmaster/about_page.html',
-                  {'about': about})
-
-
-def faq(request):
-    return render(request, 'stitchmaster/faq_page.html',
-                  {'faq': faq})
-
 
 # method for volunteer log in using OTP sent in email
 def loginView(request):
