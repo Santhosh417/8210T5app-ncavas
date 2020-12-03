@@ -1,10 +1,12 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import get_template
+from django.urls import reverse_lazy
 from django.utils import timezone
 
 from .forms import *
@@ -118,3 +120,31 @@ def sendEmail_signup(email, pwd, username):
 # updating the website name for password reset email
 class PasswordResetNCAEmailView(PasswordResetView):
     PasswordResetView.extra_email_context = {'nca_site_name': 'Nebraska Cancer Association'}
+
+# method to make volunteer subscribe to NCA Newsletter
+@login_required()
+def newsletter_subscribe(request):
+    volunteer = Volunteer.objects.get(id=request.user.id)
+    volunteer.is_subscribed=True
+    volunteer.save()
+    ############# mail for newsletter successful subscription
+    name=volunteer.first_name
+    subject = "Subscription to Nebraska Cancer Association"
+    from_email = settings.EMAIL_HOST_USER
+    to_email = request.user.email
+    context={'vname': name, 'nca_site_name': 'Nebraska Cancer Association'}
+    message = EmailMultiAlternatives(subject=subject, from_email=from_email,
+                                     to=[to_email])
+    html_template = get_template("subscription_mail.html").render(context=context)
+    message.attach_alternative(html_template, "text/html")
+    message.attach_file("nca/static/img/Newsletter.pdf", mimetype="application/pdf")
+    message.send()
+    return redirect(reverse_lazy('nca:contactus'))
+
+# method to make volunteer unsubscribe to NCA Newsletter
+@login_required()
+def newsletter_unsubscribe(request):
+    volunteer = Volunteer.objects.get(id=request.user.id)
+    volunteer.is_subscribed = False
+    volunteer.save()
+    return redirect(reverse_lazy('nca:contactus'))

@@ -9,7 +9,19 @@
     <h6 class="contactus">
       <body>Do you have any questions about volunteering and looking to volunteer? Nebraska Cancer Association contact center are here to help
       answer all of your questions. We provide accurate, reliable and up-to-date information that is easy to understand and free of cost.
-      We are available 24/7, seven days a week. <br>Please call us at <i><b>402-123-4567 </b></i> or email us at <i><b>customersupport@nca.com</b>. </i><br>
+      We are available 24/7, seven days a week. <br>Please call us at <i><b>402-123-4567 </b></i> or email us at <i><b>customersupport@nca.com</b>. </i>
+
+ {% if volunteer.is_authenticated  %}
+     {% if not volunteer.is_subscribed %}
+       <h4>Interested to know about us more??</h4>
+      <h5>Subscribe For Our NewsLetter Here. Its Free!!</h5><h6> Your Email: {{ volunteer.email }}</h6>
+       <div>
+           <a class="btn btn-warning" href="{% url 'users:subscribe' %}"><b>Subscribe To NCA</b></a>
+        </div>
+     {% else %}
+         <h6><b><u>{{ volunteer.email }}</u></b> subscribed to the newsletter!! <a href="{% url 'users:unsubscribe' %}">Unsubscribe</a></h6>
+    {% endif %}
+ {% endif %}
       </body>
     </h6>
 {% endblock content %}

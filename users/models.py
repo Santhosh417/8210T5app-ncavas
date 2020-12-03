@@ -34,6 +34,7 @@ class Volunteer(User):
     comments = models.TextField(blank=True, null=True)
     time_spent = models.CharField(max_length=50, blank=True, null=False, default=3)
     specialized_in = models.ManyToManyField(SpecializedInChoices)
+    is_subscribed = models.BooleanField(default=False, blank=True)
 
     class Meta:
         verbose_name = "Volunteer"

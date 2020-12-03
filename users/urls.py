@@ -24,4 +24,6 @@ urlpatterns = [
     path('password-reset-form/', PasswordResetNCAEmailView.as_view(), name='password_reset_form'),
     path('password-reset-done-form/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('password-reset-confirm/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('subscribe', views.newsletter_subscribe, name='subscribe'),
+    path('unsubscribe', views.newsletter_unsubscribe, name='unsubscribe'),
 ]

@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.utils import timezone
 from events.models import Event, Enrollment, Location
-from users.models import User
+from users.models import User, Volunteer
 import pytz
 from django.conf import settings
 
@@ -42,8 +42,12 @@ def home(request):
 def workinprogress(request):
         return render(request, 'workInProgress.html')
 
+# method for contact us page and volunteer subscription for newsletter
 def contactus(request):
-        return render(request, 'ContactUs.html')
+        template="ContactUs.html"
+        volunteer = Volunteer.objects.filter(id=request.user.id).first()
+        context = {'volunteer':volunteer}
+        return render(request, template, context)
 
 def faq(request):
         return render(request, 'faq.html')

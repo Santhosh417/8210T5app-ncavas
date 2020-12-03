@@ -1,0 +1,23 @@
+{% load i18n %}
+{% autoescape off %}
+<html lang="en">
+
+{% block content %}
+<head>
+    <h4  style="font-family:'Comic Sans MS','Droid Sans Mono'; color: #003366; font-size:large;">Subcription To Nebraska Cancer Association </h4>
+</head>
+    <body>
+    <div>
+        <p style="font-family: cursive; font-weight: normal; font-size:medium; color: black">
+            Hello {{ vname }},<br>
+            Thanks for subscribing to our newsletter. Please find attached newsletter regarding our events held in this month. <b>Help to Spread the cause</b> and be part of the events.
+            We look forward to meeting you soon.
+
+        <p style="font-family: cursive; font-weight: normal; font-size:medium;">{% trans "Regards," %}<br>
+        <b><strong>{% blocktrans %}The {{ nca_site_name }} team {% endblocktrans %}</strong></b></p>
+     </p>
+    </div>
+    </body>
+{% endblock content %}
+</html>
+{% endautoescape %}
