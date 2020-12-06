@@ -80,9 +80,10 @@ class VolunteerScheduleMeeting(forms.ModelForm):
             'description': forms.Textarea(attrs={'placeholder': 'Add description..', })
         }
 
-    def save(self, volunteer, victims):
+    def save(self, volunteer, victims, event_type):
         event = super().save(commit=False)
         event.volunteer = volunteer
+        event.event_type = event_type
         event.save()
         for x in victims:
             v = get_object_or_404(Victim, pk=x)

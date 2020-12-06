@@ -7,6 +7,13 @@
         {% csrf_token %}
         {{ form.as_p }}
         <p>
+            <label for="event_type">Victim:</label>
+            <select name="event_type" id='event_type'>
+                    <option value="OneToOne">One to One</option>
+                    <option value="Group">Group</option>
+            </select>
+        </p>
+        <p>
             <label for="victims">Victim:</label>
             <select name="victims" id='victimsname' multiple>
                 {% for victim in victims %}

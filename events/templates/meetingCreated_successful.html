@@ -8,7 +8,7 @@
 {% block content %}
     <div class="card mb-5">
         <h6>Thank you. The meeting is schedule.
-            Details : Event {{ event.event_name }} from {{ event.start_date_time }} to {{ event.end_date_time }} at - "{{ event.Location }}"</h6>
+            Details : Event {{ event.event_name }} from {{ event.start_date_time }} to {{ event.end_date_time }} at - "{{ event.location }}"</h6>
     </div>
       <a href='{% url 'nca:home' %}' class="mt-3 btn-sm btn-secondary">Back to Home</a>
 {% endblock content %}
