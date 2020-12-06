@@ -1,27 +1,8 @@
 from datetime import timedelta
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.forms import HiddenInput
-
-from .models import Location, Enrollment
-#
-#
-# class LocationSignUpForm(UserCreationForm):
-#     class Meta(UserCreationForm):
-#         model = Location
-#         fields = ('name', 'address', 'city', 'state', 'zip')
-#
-# class LocationForm(forms.ModelForm):
-#     class Meta:
-#         model = Location
-#         fields = ('name', 'address', 'city', 'state', 'zip')
-
-# class EnrollmentCreateForm(forms.ModelForm):
-#     class Meta:
-#         model = Enrollment
-#         fields = ['activity', 'victim', 'notes', 'is_important']
-
+from django.shortcuts import get_object_or_404
 from .models import *
 
 ## form to display volunteer meeting notes Nov 10
@@ -82,3 +63,28 @@ class AddMeetingNotesForm(forms.ModelForm):
         super(AddMeetingNotesForm, self).__init__(*args, **kwargs)
         self.fields['notes'].label = ''
 
+class DateTimeInput(forms.DateTimeInput):
+    input_type = "datetime-local"
+
+    def __init__(self, **kwargs):
+        kwargs["format"] = "%Y-%m-%dT%H:%M"
+        super().__init__(**kwargs)
+
+class VolunteerScheduleMeeting(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ('event_name', 'start_date_time','end_date_time', 'description', 'staff', 'location')
+        widgets = {
+            'start_date_time': DateTimeInput(),
+            'end_date_time': DateTimeInput(),
+            'description': forms.Textarea(attrs={'placeholder': 'Add description..', })
+        }
+
+    def save(self, volunteer, victims):
+        event = super().save(commit=False)
+        event.volunteer = volunteer
+        event.save()
+        for x in victims:
+            v = get_object_or_404(Victim, pk=x)
+            Enrollment.objects.create(event = event,victim=v)
+        return event

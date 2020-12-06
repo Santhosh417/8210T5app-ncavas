@@ -18,5 +18,6 @@ urlpatterns = [
     path('showevent_meetingnotes/<int:pk>/',views.showevent_meetingnotes, name='showevent_meetingnotes'),
     path('add_meetingnotes/<int:pk>/',views.add_meetingnotes, name='add_meetingnotes'),
     path('add_meetingnotes_success/<int:pk>/',views.add_meetingnotes, name='add_meetingnotes_success'),
+    path('meeting_create/', views.add_meeting, name='add_meeting'),
 
 ]

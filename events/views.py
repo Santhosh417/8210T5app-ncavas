@@ -128,4 +128,23 @@ def add_meetingnotes(request, pk):
         form = AddMeetingNotesForm(instance=enrollment)
         return render(request, 'AddMeetingnotes.html', {'form': form,'victim':enrollment.victim,'event':enrollment.event})
 
+@login_required
+def add_meeting(request):
+    victims = Victim.objects.all()
+    if request.method == "POST":
+        volunteer = get_object_or_404(Volunteer, pk=request.user.id)
+        updated_data = request.POST.copy()
+        updated_data.update({'start_date_time': datetime.strptime(request.POST.get("start_date_time"), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M:%S')})
+        updated_data.update({'end_date_time': datetime.strptime(request.POST.get("end_date_time"), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M:%S')})
+        form = VolunteerScheduleMeeting(data=updated_data)
+        print(request)
+        print(request.POST["victims"])
+        if form.is_valid():
+            print(form.cleaned_data)
+            event = form.save(volunteer, request.POST["victims"])
+            return render(request, 'meetingCreated_successful.html', {'event': event})
+    else:
+        form = VolunteerScheduleMeeting()
+    return render(request, 'createMeeting.html', {'form': form, 'victims': victims})
+
 

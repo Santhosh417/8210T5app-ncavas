@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="headings">Create meeting</h1>
+    <form method="POST" class="custom-form meeting-create-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <label for="victims">Victim:</label>
+            <select name="victims" id='victimsname' multiple>
+                {% for victim in victims %}
+                    <option value="{{victim.pk}}">{{victim.first_name}} {{ victim.last_name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <div class="buttons-container">
+            <button type="submit" class="save btn btn-primary">Save</button>
+        </div>
+    </form>
+{% endblock %}
+</html>

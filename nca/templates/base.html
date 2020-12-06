@@ -21,6 +21,8 @@
         <ul class="navbar-nav w-100 justify-content-end pr-5">
             {% if user.is_authenticated and user.is_staff  %}
                 <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'events:events_notes' %}">View Notes</a></li>
+            {% elif user.is_authenticated %}
+                <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'events:add_meeting' %}">Schedule a meeting</a></li>
             {% endif %}
             <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'events:events_details' %}">Events</a></li>
             <li class="nav-item"><a class="text-white text-decoration-none nav-link" href="{% url 'nca:workinprogress' %}">Stories</a></li>
