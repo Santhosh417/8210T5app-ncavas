@@ -51,3 +51,9 @@ def contactus(request):
 
 def faq(request):
         return render(request, 'faq.html')
+
+def victimStories(request):
+        return render(request, 'victim_story.html')
+
+def volunteerStories(request):
+        return render(request, 'volunteer_story.html')

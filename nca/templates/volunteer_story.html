@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{%load static %}
+{% block title %}Stories{% endblock title %}
+
+{% block content %}
+<div class="row mb-5 mt-5 ml-auto mr-auto">
+    <div class="col-sm-3 mr-2">
+        <div class="about-us-heading">
+            <img src="{% static 'img/volunteer_voice.jpg' %}" class="rounded-circle float-left" alt="Sample image"
+                 style="width:200px;height:180px">
+        </div>
+    </div>
+    <div class="col-sm-4 mr-5 ">
+        <div class="row mb-5">
+            <div class="about-us-heading">
+                Fernando Decillis
+            </div>
+            <div class="about-us-text">
+                <p>Commercial photographer Fernando Decillis signed up through Catchafire to become a skill-based volunteer. He says, “I was looking for a chance to meet up with exciting projects that needed imagery for good causes.” His first volunteer experience with the American Cancer Society was in 2017. He also recently completed a Making Strides Against Breast Cancer® photo shoot.</p>
+<p>Fernando chose the American Cancer Society for volunteering because it’s people-centered. He says, “I love to tell stories about people through imagery. Cancer affects people from all walks of life. I wanted to help tell the stories of people who benefit from the work the American Cancer Society does.”</p>
+<p>“The things you already love to do can be immensely impactful to people,” Fernando says. “Sometimes it’s hard to find a way to make a difference. I make pictures for a living. I’m hardly saving lives, but giving people a space to be themselves and share their story is really enriching.”</p>
+<p>Plus, he says, it makes you feel really good to give back, especially when you’re giving back by doing something that you’re good at and that you love doing. We couldn’t agree more, Fernando!</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+</html>
