@@ -13,16 +13,15 @@
 
  {% if volunteer.is_authenticated  %}
      {% if not volunteer.is_subscribed %}
-       <h4>Interested to know about us more??</h4>
-      <h5>Subscribe For Our NewsLetter Here. Its Free!!</h5><h6> Your Email: {{ volunteer.email }}</h6>
+       <h3>Interested to know about us more??</h3>
+      <h6>Subscribe For Our NewsLetter Here. Its Free!!</h6><h6> Your Email: {{ volunteer.email }}</h6>
        <div>
-           <a class="btn btn-warning" href="{% url 'users:subscribe' %}"><b>Subscribe To NCA</b></a>
+           <a class="btn btn-warning" href="{% url 'users:subscribe' %}"><h6><b>Subscribe To NCA</b></h6></a>
         </div>
      {% else %}
          <h6><b><u>{{ volunteer.email }}</u></b> subscribed to the newsletter!! <a href="{% url 'users:unsubscribe' %}">Unsubscribe</a></h6>
     {% endif %}
  {% endif %}
-      </body>
     </h6>
 {% endblock content %}
 </html>
