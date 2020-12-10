@@ -25,6 +25,9 @@ class VolunteerForm(forms.ModelForm):
                   'work_phone', 'street_address', 'city', 'state', 'zip',
                   'time_spent', 'specialized_in')
 
+    def __init__(self, *args, **kwargs):
+        super(VolunteerForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs['readonly'] = True
 
 class VolunteerCreationForm(UserCreationForm):
     TIME_SPENT_CHOICE = [
