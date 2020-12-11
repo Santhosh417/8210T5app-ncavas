@@ -96,9 +96,10 @@ class VolunteerAdmin(admin.ModelAdmin, VolunteerExportCsvMixin):
         split = full_path.split("/")
         if len(split) > 5:
             volunteer_id = split[4]
-            events = Event.objects.filter(volunteer__id = volunteer_id)
-            if len(events) == 0:
-                return True
+            if(volunteer_id.isnumeric()):
+                events = Event.objects.filter(volunteer__id = volunteer_id)
+                if len(events) == 0:
+                    return True
         else:
             return False
 
