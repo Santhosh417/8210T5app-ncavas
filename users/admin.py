@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from django.core.exceptions import ObjectDoesNotExist
 from .models import *
+from events.models import Event
 from django.http import HttpResponse
 import csv
 
@@ -91,6 +91,16 @@ class VolunteerAdmin(admin.ModelAdmin, VolunteerExportCsvMixin):
         except ObjectDoesNotExist:
             return 'ERROR!!'
 
+    def has_delete_permission(self, request, obj=None):
+        full_path = request.get_full_path()
+        split = full_path.split("/")
+        if len(split) > 5:
+            volunteer_id = split[4]
+            events = Event.objects.filter(volunteer__id = volunteer_id)
+            if len(events) == 0:
+                return True
+        else:
+            return False
 
 class StaffAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'first_name', 'last_name', 'email', 'work_phone')
