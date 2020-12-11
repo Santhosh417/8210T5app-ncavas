@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.core.exceptions import ObjectDoesNotExist
 from .models import *
-from events.models import Event
+from events.models import Event, Enrollment
 from django.http import HttpResponse
 import csv
 
@@ -170,6 +170,18 @@ class VictimAdmin(admin.ModelAdmin, VictimExportCsvMixin):
             return instance.disease_type
         except ObjectDoesNotExist:
             return 'ERROR!!'
+
+    def has_delete_permission(self, request, obj=None):
+        full_path = request.get_full_path()
+        split = full_path.split("/")
+        if len(split) > 5:
+            victim_id = split[4]
+            if(victim_id.isnumeric()):
+                enrollments = Enrollment.objects.filter(victim__id = victim_id)
+                if len(enrollments) == 0:
+                    return True
+        else:
+            return False
 
 admin.site.register(Volunteer, VolunteerAdmin)
 admin.site.register(Staff, StaffAdmin)
