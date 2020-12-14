@@ -137,6 +137,18 @@ class StaffAdmin(admin.ModelAdmin):
         except ObjectDoesNotExist:
             return 'ERROR!!'
 
+    def has_delete_permission(self, request, obj=None):
+        full_path = request.get_full_path()
+        split = full_path.split("/")
+        if len(split) > 5:
+            staff_id = split[4]
+            if(staff_id.isnumeric()):
+                events = Event.objects.filter(staff__id = staff_id)
+                if len(events) == 0:
+                    return True
+        else:
+            return False
+
 class VictimAdmin(admin.ModelAdmin, VictimExportCsvMixin):
     list_display = ('id', 'username', 'first_name', 'last_name', 'email', 'disease_type')
     actions = ["export_as_csv"]
